@@ -1,0 +1,9 @@
+body{
+    background: linear-gradient(#020331,#1e0136);
+    font-family: Jost;
+    color:white;
+}
+
+#title{
+    text-align: center;
+}

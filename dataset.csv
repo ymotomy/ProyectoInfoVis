@@ -1,4 +1,4 @@
-Messier;NGC;Object type;Magnitude;Constellation;Distance;Dimensions;Discoverer;Year;Name
+Messier;NGC;Object_Type;Magnitude;Constellation;Distance;Dimensions;Discoverer;Year;Name
 M1;NGC 1952;Supernova remnant / Reste de Supernova;8;Taurus;6500;6,0' x 4,0';Bévis;1731;Crab Nebula
 M2;NGC 7089;Globular Cluster / Amas Globulaire;6;Aquarius;55000;11,7';Maraldi;1746;
 M3;NGC 5272;Globular Cluster / Amas Globulaire;6;Canes Venatici;48500;18,6';Messier;1764;

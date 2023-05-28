@@ -1,33 +1,35 @@
 ////////////////////////////
 // NO EDITAR ESTE ARCHIVO //
 ////////////////////////////
-const dataset = '../dataset.csv';
+function parseo_csv(d) {
+    return {
+      Messier: d.Messier,
+      NGC: d.NGC,
+      Object_Type: d.Object_Type,
+      Magnitude: parseInt(d.Magnitude),
+      Constellation: d.Constellation,
+      Distance: parseInt(d.Distance),
+      Dimensions: d.Dimensions,
+      Discoverer: d.Discoverer,
+      Year: parseInt(d.Year),
+      Name: d.Name,
+    };
+  }
 
-function generateDataset() {
-    return [
-        {
-            "Genre": "Comedy",
-            "MoviesCount": Math.round(Math.random() * 1000 + 10),
-            "MoviesVoteAverage": Math.round(Math.random() * 500 + 10),
-            "AverageRating": Math.round((Math.random() * 9 + 1)*100)/100,
-            "AverageDuration": Math.round(Math.random() * 180 + 10),
-        },
-        {
-            "Genre": "Romance",
-            "MoviesCount": Math.round(Math.random() * 1000 + 10),
-            "MoviesVoteAverage": Math.round(Math.random() * 500 + 10),
-            "AverageRating": Math.round((Math.random() * 9 + 1)*100)/100,
-            "AverageDuration": Math.round(Math.random() * 180 + 10),
-        },
-        {
-            "Genre": "Action",
-            "MoviesCount": Math.round(Math.random() * 1000 + 10),
-            "MoviesVoteAverage": Math.round(Math.random() * 500 + 10),
-            "AverageRating": Math.round((Math.random() * 9 + 1)*100)/100,
-            "AverageDuration": Math.round(Math.random() * 180 + 10),
-        }
-    ]
-}
+  const dataset = d3.csv('dataset.csv', (d) => {
+    return {
+      Messier: d.Messier,
+      NGC: d.NGC,
+      Object_Type: d.Object_Type,
+      Magnitude: parseInt(d.Magnitude),
+      Constellation: d.Constellation,
+      Distance: parseInt(d.Distance),
+      Dimensions: d.Dimensions,
+      Discoverer: d.Discoverer,
+      Year: parseInt(d.Year),
+      Name: d.Name,
+    };
+  });
 
 // Cada vez que se oprima el botón se genera datos aletorios
 // por catgoría. Luego cargamos nuevamente la visualización.
@@ -72,15 +74,15 @@ function preprocessingMoviesDataset(genre, filter_dataset) {
     // Cada vez que cambia el selector de orden, se llama nuevamente
     // a createDVDs para que actualice la visualización
     d3.select("#order-by").on("change", (event) => {
-        createDVDs(data, genre, filter_dataset);
+        createVis2(data, genre, filter_dataset);
     })
 
     // Llamamos a la segunda función encargada de crear los datos
-    createDVDs(data, genre, filter_dataset);
+    createVis2(data, genre, filter_dataset);
 }
 
 // Cargamos primera ver la visualización con datos fijos
-createClover(generateDataset())
+createVis1(dataset)
 
 d3.select("#showCat1").on("click", () => preprocessingMoviesDataset("Comedy", false));
 d3.select("#showCat2").on("click", () => preprocessingMoviesDataset("Romance", false));

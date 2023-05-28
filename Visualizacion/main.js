@@ -7,7 +7,7 @@ SVG2.attr("width", 600).attr("height", 1500)
 
 /* Cada vez que oprima el botón de "Generar datos aleatorios"
 esta función será llamada */
-function createClover(dataset) {
+function createVis1(dataset) {
     // Completar esta función para crear la primera visualización
     console.log(dataset)
 
@@ -18,7 +18,7 @@ function createClover(dataset) {
 }
 
 
-function createDVDs(dataset, genre, filter_dataset) {
+function createVis2(dataset, genre, filter_dataset) {
     //  "ORDER_BY" indica bajo qué atributo ordenar
     let ORDER_BY = document.getElementById("order-by").selectedOptions[0].value;
 

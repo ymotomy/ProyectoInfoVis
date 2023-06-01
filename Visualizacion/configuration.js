@@ -1,7 +1,7 @@
 ////////////////////////////
 // NO EDITAR ESTE ARCHIVO //
 ////////////////////////////
-function parseo_csv(d) {
+const dataset = d3.csv('dataset.csv', (d) => {
     return {
       Messier: d.Messier,
       NGC: d.NGC,
@@ -14,34 +14,8 @@ function parseo_csv(d) {
       Year: parseInt(d.Year),
       Name: d.Name,
     };
-  }
+});
 
-  const dataset = d3.csv('dataset.csv', (d) => {
-    return {
-      Messier: d.Messier,
-      NGC: d.NGC,
-      Object_Type: d.Object_Type,
-      Magnitude: parseInt(d.Magnitude),
-      Constellation: d.Constellation,
-      Distance: parseInt(d.Distance),
-      Dimensions: d.Dimensions,
-      Discoverer: d.Discoverer,
-      Year: parseInt(d.Year),
-      Name: d.Name,
-    };
-  });
-
-// Cada vez que se oprima el botón se genera datos aletorios
-// por catgoría. Luego cargamos nuevamente la visualización.
-d3.select("#generate-data")
-    .on("click", () => {
-        // Dataset ficticio para evaluar transiciones en tamaño
-        createClover(generateDataset())
-    })
-
-/* Cada vez que se seleccione un género, esta función será llamada
-para actualizar la segunda visualización */
-let DATASET_MOVIES = [];
 function preprocessingMoviesDataset(genre, filter_dataset) {
     // Si la lista de datos está vacía, descargo el dataset
     // y lo guardo en mi variable externa "DATASET_MOVIES".
@@ -83,8 +57,3 @@ function preprocessingMoviesDataset(genre, filter_dataset) {
 
 // Cargamos primera ver la visualización con datos fijos
 createVis1(dataset)
-
-d3.select("#showCat1").on("click", () => preprocessingMoviesDataset("Comedy", false));
-d3.select("#showCat2").on("click", () => preprocessingMoviesDataset("Romance", false));
-d3.select("#showCat3").on("click", () => preprocessingMoviesDataset("Action", false));
-

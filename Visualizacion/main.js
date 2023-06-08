@@ -49,10 +49,19 @@ function createVis1(dataset) {
     .data(dataset)
     .join("image")
     .attr("xlink:href", (d) => 'img/' + d.Messier + '.png') // Reemplaza "imagenURL" por la propiedad de tu objeto que contiene la URL de la imagen
-    .attr("x", WIDTH1objects *3 / 4 ) // Ajusta la posición horizontal de la imagen
+    .attr("x", (d, i) => (WIDTH1objects*i/110) ) // Ajusta la posición horizontal de la imagen
     .attr("y", HEIGHT1objects / 2 - 52) // Ajusta la posición vertical de la imagen
     .attr("width", 90) // Ajusta el ancho de la imagen
     .attr("height", 90); // Ajusta la altura de la imagen
+
+    const zoom = d3.zoom()
+ .scaleExtent([0.5, 2])
+ .extent([[0, 0], [WIDTH1objects, HEIGHT1objects]])
+ .translateExtent([[0, 0], [WIDTH1objects, HEIGHT1objects]])
+ .on("start", () => console.log("empecé"))
+ .on("zoom", () => console.log("moviendo"))
+    // Conectamos el objeto zoom con nuestro SVG
+    SVG1objects.call(zoom)
 
 }
 

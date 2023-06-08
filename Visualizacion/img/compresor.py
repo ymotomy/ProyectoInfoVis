@@ -7,5 +7,5 @@ if __name__ == '__main__':
         
         if extension in ['.jpg', '.png', '.jpeg']:
             picture = Image.open(filename)
-            picture.save(filename, optimize=True, quality=60)
+            picture.save(filename, optimize=True, quality=30)
         

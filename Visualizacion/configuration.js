@@ -1,9 +1,5 @@
-////////////////////////////
-// NO EDITAR ESTE ARCHIVO //
-////////////////////////////
-const dataset = d3.csv('dataset.csv', (d) => {
-    return {
-      Messier: d.Messier,
+let dataset = d3.csv('dataset.csv', d => {
+      return {Messier: d.Messier,
       NGC: d.NGC,
       Object_Type: d.Object_Type,
       Magnitude: parseInt(d.Magnitude),
@@ -12,8 +8,8 @@ const dataset = d3.csv('dataset.csv', (d) => {
       Dimensions: d.Dimensions,
       Discoverer: d.Discoverer,
       Year: parseInt(d.Year),
-      Name: d.Name,
-    };
+      Name: d.Name};
+    }).then(data => {createVis1(data)
 });
 
 function preprocessingMoviesDataset(genre, filter_dataset) {
@@ -55,5 +51,3 @@ function preprocessingMoviesDataset(genre, filter_dataset) {
     createVis2(data, genre, filter_dataset);
 }
 
-// Cargamos primera ver la visualización con datos fijos
-createVis1(dataset)

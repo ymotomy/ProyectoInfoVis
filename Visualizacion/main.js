@@ -21,6 +21,19 @@ const imagenes = SVG1objects.append("g")
 const tierra = SVG1objects.append("g")
 .attr("id", "tierra")
 
+const info = SVG1info.append("g").style("visibility", "hidden");
+const info11 = info.append("text").attr("class", "txt").attr('y', '20'); //Messier
+const info12 = info.append("text").attr("class", "txt").attr('y', '40'); //Common_Name
+const info13 = info.append("text").attr("class", "txt").attr('y', '60'); //NGC
+const info14 = info.append("text").attr("class", "txt").attr('y', '80'); //Year
+const info15 = info.append("text").attr("class", "txt").attr('y', '100'); //OBject_Type
+const info16 = info.append("text").attr("class", "txt").attr('y', '120'); //Constellation
+const info17 = info.append("text").attr("class", "txt").attr('y', '140'); //Distance
+const info18 = info.append("text").attr("class", "txt").attr('y', '160'); //Magnitude
+const info19 = info.append("text").attr("class", "txt").attr('y', '180'); //Discoverer
+
+d3.selectAll(".txt").attr('x', '10').style('fill', 'white')
+
 function createVis1(dataset) {
     console.log(dataset)
 
@@ -48,11 +61,28 @@ function createVis1(dataset) {
     .selectAll("image")
     .data(dataset)
     .join("image")
+    .attr("id", (d) => d.Messier)
     .attr("xlink:href", (d) => 'img/' + d.Messier + '.png') // Reemplaza "imagenURL" por la propiedad de tu objeto que contiene la URL de la imagen
     .attr("x", (d, i) => (WIDTH1objects*i/110) ) // Ajusta la posición horizontal de la imagen
     .attr("y", HEIGHT1objects / 2 - 52) // Ajusta la posición vertical de la imagen
     .attr("width", 90) // Ajusta el ancho de la imagen
-    .attr("height", 90); // Ajusta la altura de la imagen
+    .attr("height", 90) // Ajusta la altura de la imagen
+    .on("mouseover", function (event, d) {
+      console.log(d.Messier)
+      info11.text(`${d.Messier}`); //Messier
+      info12.text(`${d.Name}`); //Common_Name
+      info13.text(`${d.NGC}`); //NGC
+      info14.text(`Year Discovered: ${d.Year}`); //Year
+      info15.text(`Object Type: ${d.Object_Type}`); //OBject_Type
+      info16.text(`Constellation: ${d.Constellation}`); //Constellation
+      info17.text(`Distance: ${d.Distance} ly`); //Distance
+      info18.text(`Magnitude: ${d.Magnitude}`); //Magnitude
+      info19.text(`Discoverer: ${d.Discoverer}`); //Discoverer
+      info.style("visibility", "visible");
+    }).on("mouseout", () => {
+      info.style("visibility", "hidden");
+    });
+
 
     const zoom = d3.zoom()
  .scaleExtent([0.5, 2])

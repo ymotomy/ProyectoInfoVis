@@ -26,18 +26,12 @@ body{
 
 #info-1{
     background-color: rgba(0, 0, 0, 0.25);
-    /* width: 25%; */
 }
 
 #objects-1{
     background-color: rgba(0, 0, 0, 0.25);
 
 }
-
-/* #info-1, #objects-1{ 
-    width: 50%;
-    float: left;
-  } */
 
 #vis-2{
     background-color: rgba(0, 0, 0, 0.25);

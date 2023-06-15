@@ -9,7 +9,10 @@ let dataset = d3.csv('dataset.csv', d => {
       Discoverer: d.Discoverer,
       Year: d.Year,
       Name: d.Name};
-    }).then(data => {createVis1(data)
+    }).then(data => {
+        createVis1(data);
+        createVis2(data);
+        createVis3(data)
 });
 
 function preprocessingMoviesDataset(genre, filter_dataset) {

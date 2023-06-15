@@ -78,9 +78,9 @@ function createVis1(dataset) {
         .attr("id", (d) => d.Messier)
         .attr("xlink:href", (d) => 'img/' + d.Messier + '.png') // Reemplaza "imagenURL" por la propiedad de tu objeto que contiene la URL de la imagen
         .attr("x", (d, i) => (escalaDistance(d.Distance)) ) // Ajusta la posición horizontal de la imagen
-        .attr("y", HEIGHT1objects / 2 - 45) // Ajusta la posición vertical de la imagen
-        .attr("width", 90) // Ajusta el ancho de la imagen
-        .attr("height", 90) // Ajusta la altura de la imagen
+        .attr("y", HEIGHT1objects / 2 - 44) // Ajusta la posición vertical de la imagen
+        .attr("width", 88) // Ajusta el ancho de la imagen
+        .attr("height", 88) // Ajusta la altura de la imagen
         .on("mouseover", function (event, d) {
           info11.text(`${d.Name}`); //Common_Name
           info12.text(`${d.Messier}`); //Messier
@@ -108,45 +108,75 @@ function createVis1(dataset) {
     const manejadorZoom = (evento) => {
       const transformacion = evento.transform;
       // Actualizamos el rango de la escala considerando la transformación realizada.
-      escalaDistance.range([transformacion.applyX(0), transformacion.applyX(WIDTH1objects - margins.right - margins.left)])
+      //escalaDistance.range([transformacion.applyX(0), transformacion.applyX(WIDTH1objects - margins.right - margins.left)])
       // Actualizamos posición en X y ancho de las barras considerando la nueva escala.
       contenedorImagenes
-        .selectAll("image")
-        .attr("x", (d) => escalaDistance(d.Distance) + escalaDistance.bandwidth() / 4)
-        .attr("width", escalaDistance.bandwidth() / 2)
+      .attr("transform", transformacion)
+        //.selectAll("image")
+        //.attr("x", (d) => escalaDistance(d.Distance) + escalaDistance.bandwidth() / 4)
+        //.attr("width", escalaDistance.bandwidth() / 2)
 
       // Actualizamos el ejeX
-      contenedorImagenes.call(ejeTiempo);
+      //contenedorImagenes.call(ejeTiempo);
       // Guardamos dicha transformación en nuestra variable global.
-      zoomActual = transformacion;
+      //zoomActual = transformacion;
     };
     
     // Inicializar Zoom
     const zoom = d3.zoom()
-		.extent([[0, 0], [WIDTH1objects, HEIGHT1objects]])
-		.translateExtent([[0, 0], [WIDTH1objects, HEIGHT1objects]])
+		//.extent([[0, 0], [WIDTH1objects, HEIGHT1objects]])
+		//.translateExtent([[0, 0], [WIDTH1objects, HEIGHT1objects]])
 		.scaleExtent([1, 8])
 		.on("zoom", manejadorZoom)
     .on("start", () => console.log("empecé"))
-    .on("zoom", () => console.log("moviendo"));
+    .on("end", () => console.log("Terminé"));
 
     // Seteamos que el valor que el zoom tiene actualmente
 	  // es el zoom que se realizó la vez pasada
-	  SVG1objects.call(zoom.transform, zoomActual)
+	  //SVG1objects.call(zoom.transform, zoomActual)
 	  // Conectar el zoom al svg
 	  SVG1objects.call(zoom)
 }
 
 
-function createVis2(dataset, genre, filter_dataset) {
-    //  "ORDER_BY" indica bajo qué atributo ordenar
-    let ORDER_BY = document.getElementById("order-by").selectedOptions[0].value;
 
-    // Actualizo nombre de un H4 para saber el género seleccionado
-    d3.selectAll("#selected").text(`Genre: ${genre} - Filter: ${filter_dataset}`)
+//grafi
+function createVis2(dataset) {
+  //EJE Y------------------------------------------------------------------------------------------
+  //const max_y = d3.max(((d) => d.Object_Type).length);
+  const max_y = 10;
+  console.log(max_y);
+  const escalaY = d3
+    .scaleLinear()
+    .domain([0, max_y + 3000])
+    .range([HEIGHTVIS, 0]);
+  const ejeY = d3.axisLeft(escalaY);
+  svg
+    .append("g")
+    .attr("transform", `translate(${MARGIN.left}, ${MARGIN.top})`)
+    .call(ejeY)
+    .selectAll("line")
+    .attr("x1", WIDTHVIS)
+    .attr("stroke-dasharray", "5")
+    .attr("opacity", 0.5);
 
-    console.log(genre)
-    console.log(filter_dataset)
-    console.log(ORDER_BY)
-    console.log(dataset)
+  //EJE X------------------------------------------------------------------------------------------
+  const max_x = d3.max(json, (d) => d.desean);
+  const escalaX = d3
+    .scaleLinear()
+    .domain([0, max_x + 3000])
+    .range([0, WIDTHVIS]);
+  const ejeX = d3.axisBottom(escalaX);
+  svg
+    .append("g")
+    .attr("transform", `translate(${MARGIN.left}, ${HEIGHTVIS + MARGIN.top})`)
+    .call(ejeX)
+    .selectAll("line")
+    .attr("y1", -HEIGHTVIS)
+    .attr("stroke-dasharray", "5")
+    .attr("opacity", 0.5);
+
+}
+
+function createVis3(dataset) {
 }

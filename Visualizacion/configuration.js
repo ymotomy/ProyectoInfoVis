@@ -7,7 +7,7 @@ let dataset = d3.csv('dataset.csv', d => {
       Distance: parseInt(d.Distance),
       Dimensions: d.Dimensions,
       Discoverer: d.Discoverer,
-      Year: parseInt(d.Year),
+      Year: d.Year,
       Name: d.Name};
     }).then(data => {createVis1(data)
 });

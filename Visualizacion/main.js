@@ -1,33 +1,33 @@
-const SVG1info = d3.select("#vis-1").append("svg").attr("id", "info-1");
-d3.select("#vis-1").append("svg").style("width", "20px");
-const SVG1objects = d3.select("#vis-1").append("svg").attr("id", "objects-1");
-const SVG2 = d3.select("#vis-2").append("svg");
-
+// CONSTANTES
 const WIDTH1info = 295,
       HEIGHT1info = 400,
       WIDTH1objects = 895,
       HEIGHT1objects = 400,
-      WIDTH2 = 600,
-      HEIGHT2 = 1500;
+      WIDTH2 = 1100,
+      HEIGHT2 = 650;
 
-const margins = {
-	top: 20,
-	bottom: 20,
+const MARGIN = {
+	top: 70,
+	bottom: 60,
 	left: 40,
-	right: 40
+	right: 60
 };
 
 let zoomActual = d3.zoomIdentity;
 
-// Editar tamaños como estime conveniente
+
+// VISUALIZACION 1 ----------------------------------------------------------------------------------------------------------------------
+const SVG1info = d3.select("#vis-1").append("svg").attr("id", "info-1");
+d3.select("#vis-1").append("svg").style("width", "20px");
+const SVG1objects = d3.select("#vis-1").append("svg").attr("id", "objects-1");
+
 SVG1info.attr("width", WIDTH1info).attr("height", HEIGHT1info)
 SVG1objects.attr("width", WIDTH1objects).attr("height", HEIGHT1objects)
-SVG2.attr("width", WIDTH2).attr("height", HEIGHT2)
 
 const contenedorImagenes = SVG1objects
       .append("g")
       .attr("class", "img")
-      // .attr("transform", `translate(${margins.left} ${margins.top})`);
+      // .attr("transform", `translate(${MARGIN.left} ${MARGIN.top})`);
 const tierra = SVG1objects
       .append("g")
       .attr("id", "tierra")
@@ -51,7 +51,7 @@ function createVis1(dataset) {
     const escalaDistance = d3
     .scaleLog()
 		.domain([d3.min(dataset, (d) => (d.Distance)), d3.max(dataset, (d) => (d.Distance))])
-		.range([25, WIDTH1objects - margins.left - margins.right])
+		.range([25, WIDTH1objects - MARGIN.left - MARGIN.right])
 
     tierra
     .append("circle")
@@ -108,7 +108,7 @@ function createVis1(dataset) {
     const manejadorZoom = (evento) => {
       const transformacion = evento.transform;
       // Actualizamos el rango de la escala considerando la transformación realizada.
-      //escalaDistance.range([transformacion.applyX(0), transformacion.applyX(WIDTH1objects - margins.right - margins.left)])
+      //escalaDistance.range([transformacion.applyX(0), transformacion.applyX(WIDTH1objects - MARGIN.right - MARGIN.left)])
       // Actualizamos posición en X y ancho de las barras considerando la nueva escala.
       contenedorImagenes
       .attr("transform", transformacion)
@@ -138,45 +138,92 @@ function createVis1(dataset) {
 	  SVG1objects.call(zoom)
 }
 
+// VISUALIZACION 2 ----------------------------------------------------------------------------------------------------------------------
+const SVG2 = d3.select("#vis-2").append("svg").attr("id", "gl")
 
+SVG2.attr("width", WIDTH2).attr("height", HEIGHT2)
+
+SVG2
+  .append("text")
+  .attr("x", 20)
+  .attr("y", 40)
+  .text("Año de Descubrimiento")
+  .style("font-family", "Arial");
+SVG2
+  .append("text")
+  .attr("x", 430)
+  .attr("y", 580)
+  .text("Cantidad de Objetos")
+  .style("font-family", "Arial");
+
+
+const contenedor2 = SVG2
+  .append("g")
+  .attr("transform", `translate(${MARGIN.left} ${MARGIN.top})`);
 
 //grafi
 function createVis2(dataset) {
   //EJE Y------------------------------------------------------------------------------------------
-  //const max_y = d3.max(((d) => d.Object_Type).length);
-  const max_y = 10;
-  console.log(max_y);
   const escalaY = d3
     .scaleLinear()
-    .domain([0, max_y + 3000])
-    .range([HEIGHTVIS, 0]);
+    .domain([0, 40])
+    .range([HEIGHT2 - 2*MARGIN.bottom, 0]);
   const ejeY = d3.axisLeft(escalaY);
-  svg
+  SVG2
     .append("g")
     .attr("transform", `translate(${MARGIN.left}, ${MARGIN.top})`)
     .call(ejeY)
     .selectAll("line")
-    .attr("x1", WIDTHVIS)
+    .attr("x1", WIDTH2-(2*MARGIN.left))
     .attr("stroke-dasharray", "5")
     .attr("opacity", 0.5);
 
-  //EJE X------------------------------------------------------------------------------------------
-  const max_x = d3.max(json, (d) => d.desean);
+  // EJE X------------------------------------------------------------------------------------------
   const escalaX = d3
     .scaleLinear()
-    .domain([0, max_x + 3000])
-    .range([0, WIDTHVIS]);
+    .domain([1610,1750])
+    .range([0, WIDTH2 - 2*MARGIN.left]);
   const ejeX = d3.axisBottom(escalaX);
-  svg
+  SVG2
     .append("g")
-    .attr("transform", `translate(${MARGIN.left}, ${HEIGHTVIS + MARGIN.top})`)
+    .attr("transform", `translate(${MARGIN.left}, ${MARGIN.top + HEIGHT2 - 2*MARGIN.bottom})`)
     .call(ejeX)
     .selectAll("line")
-    .attr("y1", -HEIGHTVIS)
+    .attr("y1", -(HEIGHT2-(2*MARGIN.bottom)))
     .attr("stroke-dasharray", "5")
     .attr("opacity", 0.5);
+  contenedor2.raise()
+
+  //AGREGAMOS LOS CIRCULOS-------------------------------------------------------------------------
+  var color = {
+    "Galaxy": '#f72585',
+    "Globular Cluster":'#0077b6',
+    "Open Cluster":'#d00000',
+    "Nebula": '#00fff5',
+    "Double star": '#7b2cbf'
+  };
+
+  // Creamos una línea que más tarde cargaremos en el path
+  var valueline = d3.line()
+  .escalaX(function(d) { return escalaX(d.Year); })
+  .escalaY(function(d) { return escalaY(5); });
+
+  dataset.forEach((d) =>{
+    d.Year = parseTime(d.Year);
+    d.close = +d.close;
+});
+
+x.domain(d3.extent(data, function(d) { return d.date; }));
+y.domain([0, d3.max(data, function(d) { return d.close; })]);
+
+svg.append("path")
+    .data([data])
+    .attr("class", "line")
+    .attr("d", valueline);
 
 }
+
+// VISUALIZACION 3 ----------------------------------------------------------------------------------------------------------------------
 
 function createVis3(dataset) {
 }

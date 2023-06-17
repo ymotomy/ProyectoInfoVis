@@ -1,4 +1,4 @@
-let dataset = d3.csv('dataset.csv', d => {
+let dataset = d3.csv('data/dataset.csv', d => {
       return {Messier: d.Messier,
       NGC: d.NGC,
       Object_Type: d.Object_Type,

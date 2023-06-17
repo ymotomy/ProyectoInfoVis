@@ -8,7 +8,7 @@ const WIDTH1info = 295,
 
 const MARGIN = {
 	top: 70,
-	bottom: 60,
+	bottom: 70,
 	left: 40,
 	right: 60
 };
@@ -147,14 +147,16 @@ SVG2
   .append("text")
   .attr("x", 20)
   .attr("y", 40)
-  .text("Año de Descubrimiento")
-  .style("font-family", "Arial");
-SVG2
-  .append("text")
-  .attr("x", 430)
-  .attr("y", 580)
   .text("Cantidad de Objetos")
-  .style("font-family", "Arial");
+  .style("font-family", "Jost")
+  .attr("fill", "white");
+  SVG2
+  .append("text")
+  .attr("x", WIDTH2 - 200)
+  .attr("y", 620)
+  .text("Año de Descubrimiento")
+  .style("font-family", "Jost")
+  .attr("fill", "white");
 
 
 const contenedor2 = SVG2

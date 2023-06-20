@@ -19,6 +19,10 @@ body{
     display: flex;
 }
 
+#vis-2{
+    justify-content: center;
+    display: flex;
+}
 
 .horizontal{
     width: 100%;
@@ -36,6 +40,10 @@ body{
 #gl{
     background-color: rgba(0, 0, 0, 0.25);
 
+}
+
+#info-2{
+    background-color: rgba(0, 0, 0, 0.25);
 }
 
 #cp{

@@ -5,7 +5,7 @@ M3,NGC 5272,Globular Cluster,6,Canes Venatici,48500,18.6',Messier,1764,,Globular
 M4,NGC 6121,Globular Cluster,5,Scorpius,9900,22.8',Chéseaux,1746,,Globular Cluster
 M5,NGC 5904,Globular Cluster,5,Serpens,24800,19.9',Kirch,1702,,Globular Cluster
 M6,NGC 6504,Open Cluster,4,Scorpius,1300,15.0',Hodierna,1654,Butterfly Cluster,Open Cluster
-M7,NGC 6475,Open Cluster,3,Scorpius,780,30.0',Ptolémée,No Establecido,Ptolemy Cluster,Open Cluster
+M7,NGC 6475,Open Cluster,3,Scorpius,780,30.0',Ptolémée,1764,Ptolemy Cluster,Open Cluster
 M8,NGC 6523,Emission Nebula,5,Sagittarius,4850,90.0' x 40.0',Flamsteed,1680,Lagoon Nebula,Nebula
 M9,NGC 6333,Globular Cluster,7,Ophiuchus,25800,5.5',Messier,1764,,Globular Cluster
 M10,NGC 6254,Globular Cluster,6,Ophiuchus,16300,12.2',Messier,1764,,Globular Cluster
@@ -29,7 +29,7 @@ M27,NGC 6853,Planetary Nebula,8,Vulpecula,980,348.0'',Messier,1764,Dumbbell Nebu
 M28,NGC 6626,Globular Cluster,6,Sagittarius,19000,15.0',Messier,1764,,Globular Cluster
 M29,NGC 6913,Open Cluster,6,Cygnus,4100,7.0',Messier,1764,,Open Cluster
 M30,NGC 7099,Globular Cluster,7,Capricornus,41000,8.9',Messier,1764,,Globular Cluster
-M31,NGC 224,Galaxy,3,Andromeda,2500000,180.0' x 63.0',No Registrado,No Establecido,Andromeda Galaxy,Galaxy
+M31,NGC 224,Galaxy,3,Andromeda,2500000,180.0' x 63.0',No Registrado,1764,Andromeda Galaxy,Galaxy
 M32,NGC 221,Galaxy,8,Andromeda,2500000,7.6' x 5.8',Le Gentil,1749,,Galaxy
 M33,NGC 598,Galaxy,5,Triangulum,2723000,62.0. x 39.0',Messier,1764,Triangulum Galaxy,Galaxy
 M34,NGC 1039,Open Cluster,5,Perseus,1450,35.0',Messier,1764,,Open Cluster
@@ -42,7 +42,7 @@ M40,Winnecke 4,Double star,9,Ursa Major,510,0.8,Hevelius,1660,,Double star
 M41,NGC 2287,Open Cluster,4,Canis Major,1600,30.0',Hodierna,1654,,Open Cluster
 M42,NGC 9176,Emission Nebula,4,Orion,1500,30.0',Peiresc,1610,Great Orion Nebula,Nebula
 M43,NGC 1982,Reflection Nebula,9,Orion,1500,20.0' x 15.0',Mairan,1750,Mairan Nebula,Nebula
-M44,NGC 2632,Open Cluster,3,Cancer,520,70.0',No Registrado,No Establecido,Beehive Cluster,Open Cluster
+M44,NGC 2632,Open Cluster,3,Cancer,520,70.0',No Registrado,1769,Beehive Cluster,Open Cluster
 M45,,Open Cluster,1,Taurus,410,120.0',Messier,1769,Pleiades,Open Cluster
 M46,NGC 2437,Open Cluster,6,Puppis,3200,24.0',Messier,1771,,Open Cluster
 M47,NGC 2422,Open Cluster,4,Puppis,1750,22.0',Hodierna,1654,,Open Cluster

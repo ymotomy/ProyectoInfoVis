@@ -8,7 +8,8 @@ let dataset = d3.csv('data/dataset.csv', d => {
       Dimensions: d.Dimensions,
       Discoverer: d.Discoverer,
       Year: d.Year,
-      Name: d.Name};
+      Name: d.Name,
+      Object_Type2: d.Object_Type2};
     }).then(data => {
         createVis1(data);
         createVis2(data);

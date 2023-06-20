@@ -1,8 +1,11 @@
 const WIDTH_BUBBLE = 900,
   HEIGHT_BUBBLE = WIDTH_BUBBLE * 0.7;
+
 const margin_bubble = { top: 80, bottom: 70, left: 100, right: 50 };
+
 const width_bubble = WIDTH_BUBBLE - margin_bubble.left - margin_bubble.right,
   height_bubble = HEIGHT_BUBBLE - margin_bubble.top - margin_bubble.bottom;
+
 const svg_bubble = d3
   .select("#bubble-container")
   .style("border", "5px solid var(--acnh-brown)")
@@ -10,10 +13,13 @@ const svg_bubble = d3
   .append("svg")
   .attr("width", WIDTH_BUBBLE)
   .attr("height", HEIGHT_BUBBLE);
+
 const defs = svg_bubble.append("defs");
+
 const g_bubble = svg_bubble
   .append("g")
   .attr("transform", `translate(${margin_bubble.left}, ${margin_bubble.top})`);
+
 const title_bubble = svg_bubble
   .append("text")
   .attr(

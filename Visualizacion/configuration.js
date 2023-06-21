@@ -1,20 +1,21 @@
-let dataset = d3.csv('data/dataset.csv', d => {
-      return {Messier: d.Messier,
+let dataset = d3.csv('data/dataset2.csv', d => {
+    return {
+      Messier: d.Messier,
       NGC: d.NGC,
-      Object_Type: d.Object_Type,
+      Object_Type: d.Object_Type === 'Emission Nebula' || d.Object_Type === 'Planetary Nebula' || d.Object_Type === 'Reflection Nebula' || d.Object_Type === 'Supernova remnant' ? 'Nebula' : d.Object_Type,
       Magnitude: parseInt(d.Magnitude),
       Constellation: d.Constellation,
       Distance: parseInt(d.Distance),
       Dimensions: d.Dimensions,
-      Discoverer: d.Discoverer,
+      Discoverer: (d.Discoverer/3.14)**(0.5),
       Year: d.Year,
-      Name: d.Name,
-      Object_Type2: d.Object_Type2};
-    }).then(data => {
-        createVis1(data);
-        createVis2(data);
-        createVis3(data)
-});
+      Name: d.Name
+    };
+  }).then(data => {
+    createVis1(data);
+    createVis2(data);
+    createVis3(data);
+  });
 
 function preprocessingMoviesDataset(genre, filter_dataset) {
     // Si la lista de datos está vacía, descargo el dataset

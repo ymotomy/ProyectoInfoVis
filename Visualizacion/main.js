@@ -11,7 +11,7 @@ let zoomActual = d3.zoomIdentity;
 const WIDTH1info = 295,
   HEIGHT1info = 400,
   WIDTH1objects = 895,
-  HEIGHT1objects = 400
+  HEIGHT1objects = 400;
 
 const SVG1info = d3.select("#vis-1").append("svg").attr("id", "info-1");
 d3.select("#vis-1").append("svg").style("width", "20px");
@@ -24,20 +24,53 @@ const contenedorImagenes = SVG1objects.append("g").attr("class", "img");
 const tierra = SVG1objects.append("g").attr("id", "tierra");
 
 const info1 = SVG1info.append("g").style("visibility", "hidden");
-const info11 = info1.append("text").attr("class", "txt").attr("x", "10").attr("y", "60"); //Common_Name
-const info12 = info1.append("text").attr("class", "txt").attr("x", "10").attr("y", "90"); //Messier
-const info13 = info1.append("text").attr("class", "txt").attr("x", "10").attr("y", "120"); //NGC
-const info14 = info1.append("text").attr("class", "txt").attr("x", "10").attr("y", "150"); //Year
-const info15 = info1.append("text").attr("class", "txt").attr("x", "10").attr("y", "180"); //OBject_Type
-const info16 = info1.append("text").attr("class", "txt").attr("x", "10").attr("y", "210"); //Constellation
-const info17 = info1.append("text").attr("class", "txt").attr("x", "10").attr("y", "240"); //Distance
-const info18 = info1.append("text").attr("class", "txt").attr("x", "10").attr("y", "270"); //Magnitude
-const info19 = info1.append("text").attr("class", "txt").attr("x", "10").attr("y", "300"); //Discoverer
-
+const info11 = info1
+  .append("text")
+  .attr("class", "txt")
+  .attr("x", "10")
+  .attr("y", "60"); //Common_Name
+const info12 = info1
+  .append("text")
+  .attr("class", "txt")
+  .attr("x", "10")
+  .attr("y", "90"); //Messier
+const info13 = info1
+  .append("text")
+  .attr("class", "txt")
+  .attr("x", "10")
+  .attr("y", "120"); //NGC
+const info14 = info1
+  .append("text")
+  .attr("class", "txt")
+  .attr("x", "10")
+  .attr("y", "150"); //Year
+const info15 = info1
+  .append("text")
+  .attr("class", "txt")
+  .attr("x", "10")
+  .attr("y", "180"); //OBject_Type
+const info16 = info1
+  .append("text")
+  .attr("class", "txt")
+  .attr("x", "10")
+  .attr("y", "210"); //Constellation
+const info17 = info1
+  .append("text")
+  .attr("class", "txt")
+  .attr("x", "10")
+  .attr("y", "240"); //Distance
+const info18 = info1
+  .append("text")
+  .attr("class", "txt")
+  .attr("x", "10")
+  .attr("y", "270"); //Magnitude
+const info19 = info1
+  .append("text")
+  .attr("class", "txt")
+  .attr("x", "10")
+  .attr("y", "300"); //Discoverer
 
 function createVis1(dataset) {
-  console.log(dataset);
-
   const escalaDistance = d3
     .scaleLog()
     .domain([
@@ -129,12 +162,11 @@ function createVis1(dataset) {
   SVG1objects.call(zoom);
 }
 
-
 // VISUALIZACION 2 ----------------------------------------------------------------------------------------------------------------------
 const WIDTH2 = 800,
-      HEIGHT2 = 650,
-      WIDTH2info = 295,
-      HEIGHT2info = 210;
+  HEIGHT2 = 650,
+  WIDTH2info = 295,
+  HEIGHT2info = 225;
 
 const SVG2 = d3.select("#vis-2").append("svg").attr("id", "gl");
 SVG2.attr("width", WIDTH2).attr("height", HEIGHT2);
@@ -144,27 +176,78 @@ SVG2info.attr("width", WIDTH2info).attr("height", HEIGHT2info);
 
 var color = {
   Galaxy: "#f72585",
-  "Globular Cluster": "#0077b6",
-  "Open Cluster": "#d00000",
-  Nebula: "#00fff5",
-  "Double star": "#7b2cbf",
+  "Globular Cluster": "#00fff5",
+  "Open Cluster": "#0077b6",
+  Nebula: "#d00000",
+  "Double star": "#66FF00",
 };
+
 const info2 = SVG2info.append("g");
-
-const circle21 = info2.append("circle").attr("class", "circle").attr("fill", "#f72585").attr("cx", "20").attr("cy", "54").attr("r", "7")
-const circle22 = info2.append("circle").attr("class", "circle").attr("fill", "#0077b6").attr("cx", "20").attr("cy", "84").attr("r", "7")
-const circle23 = info2.append("circle").attr("class", "circle").attr("fill", "#d00000").attr("cx", "20").attr("cy", "114").attr("r", "7")
-const circle24 = info2.append("circle").attr("class", "circle").attr("fill", "#00fff5").attr("cx", "20").attr("cy", "144").attr("r", "7")
-const circle25 = info2.append("circle").attr("class", "circle").attr("fill", "#7b2cbf").attr("cx", "20").attr("cy", "174").attr("r", "7")
-
-const info21 = info2.append("text").attr("class", "txt").attr("x", "35").attr("y", "60").text("Galaxy")
-const info22 = info2.append("text").attr("class", "txt").attr("x", "35").attr("y", "90").text("Globular Cluster");
-const info23 = info2.append("text").attr("class", "txt").attr("x", "35").attr("y", "120").text("Open Cluster");
-const info24 = info2.append("text").attr("class", "txt").attr("x", "35").attr("y", "150").text("Nebula");
-const info25 = info2.append("text").attr("class", "txt").attr("x", "35").attr("y", "180").text("Double Star")
-
-SVG2.attr("width", WIDTH2).attr("height", HEIGHT2);
-SVG2info.attr("width", WIDTH1info).attr("height", HEIGHT1info);
+const info21 = info2
+  .append("text")
+  .attr("class", "txt")
+  .attr("x", "35")
+  .attr("y", "60")
+  .text("Galaxy");
+const info22 = info2
+  .append("text")
+  .attr("class", "txt")
+  .attr("x", "35")
+  .attr("y", "90")
+  .text("Globular Cluster");
+const info23 = info2
+  .append("text")
+  .attr("class", "txt")
+  .attr("x", "35")
+  .attr("y", "120")
+  .text("Open Cluster");
+const info24 = info2
+  .append("text")
+  .attr("class", "txt")
+  .attr("x", "35")
+  .attr("y", "150")
+  .text("Nebula");
+const info25 = info2
+  .append("text")
+  .attr("class", "txt")
+  .attr("x", "35")
+  .attr("y", "180")
+  .text("Double Star");
+const circle21 = info2
+  .append("circle")
+  .attr("class", "circle")
+  .attr("fill", color[Object.keys(color)[0]])
+  .attr("cx", "20")
+  .attr("cy", "54")
+  .attr("r", "7");
+const circle22 = info2
+  .append("circle")
+  .attr("class", "circle")
+  .attr("fill", color[Object.keys(color)[1]])
+  .attr("cx", "20")
+  .attr("cy", "84")
+  .attr("r", "7");
+const circle23 = info2
+  .append("circle")
+  .attr("class", "circle")
+  .attr("fill", color[Object.keys(color)[2]])
+  .attr("cx", "20")
+  .attr("cy", "114")
+  .attr("r", "7");
+const circle24 = info2
+  .append("circle")
+  .attr("class", "circle")
+  .attr("fill", color[Object.keys(color)[3]])
+  .attr("cx", "20")
+  .attr("cy", "144")
+  .attr("r", "7");
+const circle25 = info2
+  .append("circle")
+  .attr("class", "circle")
+  .attr("fill", color[Object.keys(color)[4]])
+  .attr("cx", "20")
+  .attr("cy", "174")
+  .attr("r", "7");
 
 SVG2.append("text")
   .attr("x", 20)
@@ -183,10 +266,17 @@ const contenedor2 = SVG2.append("g").attr(
   "transform",
   `translate(${MARGIN.left} ${MARGIN.top})`
 );
+function ParseoYear(year) {
+  if (isNaN(year)) {
+    return 1610;
+  } else {
+    return parseInt(year);
+  }
+}
 
 function createVis2(dataset) {
   dataset = dataset.sort((a, b) => {
-    return a.Year - b.Year;
+    return ParseoYear(a.Year) - ParseoYear(b.Year);
   });
 
   function frecuenciaObjects(object) {
@@ -211,7 +301,10 @@ function createVis2(dataset) {
   // EJE X------------------------------------------------------------------------------------------
   const escalaX = d3
     .scaleLinear()
-    .domain([d3.min(dataset, (d)=>d.Year), d3.max(dataset, (d)=>d.Year)])
+    .domain([
+      d3.min(dataset, (d) => ParseoYear(d.Year)),
+      d3.max(dataset, (d) => ParseoYear(d.Year)),
+    ])
     .range([0, WIDTH2 - 2 * MARGIN.left]);
   const ejeX = d3.axisBottom(escalaX);
   SVG2.append("g")
@@ -226,23 +319,24 @@ function createVis2(dataset) {
     .attr("opacity", 0.5);
 
   contenedor2.raise();
-//AGREGAMOS LOS CIRCULOS-------------------------------------------------------------------------
-var objects = {
-  Galaxy: 0,
-  "Globular Cluster": 0,
-  "Open Cluster": 0,
-  Nebula: 0,
-  "Double star": 0,};
-contenedor2
-  .selectAll("rect")
-  .data(dataset)
-  .join("circle")
-  .attr("r", 4)
-  .attr("fill", (d) => color[d.Object_Type2])
-  .attr("cx", (d) => escalaX(d.Year))
-  .attr("cy", (d) => escalaY(frecuenciaObjects(d.Object_Type2)))
-  .append("title")
-  .text((d) => d.Messier);
+  //AGREGAMOS LOS CIRCULOS-------------------------------------------------------------------------
+  var objects = {
+    Galaxy: 0,
+    "Globular Cluster": 0,
+    "Open Cluster": 0,
+    Nebula: 0,
+    "Double star": 0,
+  };
+  contenedor2
+    .selectAll("rect")
+    .data(dataset)
+    .join("circle")
+    .attr("r", 3)
+    .attr("fill", (d) => color[d.Object_Type])
+    .attr("cx", (d) => escalaX(ParseoYear(d.Year)))
+    .attr("cy", (d) => escalaY(frecuenciaObjects(d.Object_Type)))
+    .append("title")
+    .text((d) => d.Messier);
   //AGREGAMOS LAS LINEAS---------------------------------------------------------------------------
   var objects = {
     Galaxy: 0,
@@ -253,289 +347,111 @@ contenedor2
   };
   var line = d3
     .line()
-    .x((d) => escalaX(d.Year))
-    .y((d) => escalaY(frecuenciaObjects(d.Object_Type2)))
-    .curve(d3.curveCatmullRom);
+    .x((d) => escalaX(ParseoYear(d.Year)))
+    .y((d) => escalaY(frecuenciaObjects(d.Object_Type)))
+    .curve(d3.curveLinear);
 
   var keys = Object.keys(objects);
   for (var i = 0; i < keys.length; i++) {
-    var data_filter = dataset.filter((d) => d.Object_Type2 == keys[i]);
+    var data_filter = dataset.filter((d) => d.Object_Type == keys[i]);
     contenedor2
-    .append("path")
-    .data([data_filter])
-    .attr("d", line)
-    .attr("class", "line")
-    .attr("stroke", color[keys[i]])
-    .attr("fill", "transparent")
-    .attr('stroke-width', 4)
-    }
+      .append("path")
+      .data([data_filter])
+      .attr("d", line)
+      .attr("class", "line")
+      .attr("stroke", color[keys[i]])
+      .attr("fill", "transparent")
+      .attr("stroke-width", 3);
+  }
 }
 
 // VISUALIZACION 3 ----------------------------------------------------------------------------------------------------------------------
-const WIDTH3 = 1100,
-      HEIGHT3 = 650;
+const WIDTH3 = 1200,
+      HEIGHT3 = 800;
 
 const SVG3 = d3.select("#vis-3").append("svg").attr("id", "cp");
 
 SVG3.attr("width", WIDTH3).attr("height", HEIGHT3);
 
 function createVis3(dataset) {
-  //   const WIDTH_BUBBLE = 900,
-  //         HEIGHT_BUBBLE = WIDTH_BUBBLE * 0.7;
-  // const margin_bubble = {top: 80,
-  //                       bottom: 70,
-  //                       left: 100,
-  //                       right: 50};
-  // const width_bubble = WIDTH_BUBBLE - margin_bubble.left - margin_bubble.right,
-  //   height_bubble = HEIGHT_BUBBLE - margin_bubble.top - margin_bubble.bottom;
-  // const svg_bubble = d3
-  //   .select("#bubble-container")
-  //   .style("border", "5px solid var(--acnh-brown)")
-  //   .style("border-radius", "5px")
-  //   .append("svg")
-  //   .attr("width", WIDTH_BUBBLE)
-  //   .attr("height", HEIGHT_BUBBLE);
-  // const defs = svg_bubble.append("defs");
-  // const g_bubble = svg_bubble
-  //   .append("g")
-  //   .attr("transform", `translate(${margin_bubble.left}, ${margin_bubble.top})`);
-  // const title_bubble = svg_bubble
-  //   .append("text")
-  //   .attr(
-  //     "transform",
-  //     `translate(${margin_bubble.left + width_bubble / 2}, ${
-  //       margin_bubble.top / 2
-  //     })`
-  //   )
-  //   .attr("dy", "0.5em")
-  //   .style("text-anchor", "middle");
-  // const fillColour = d3
-  //   .scaleOrdinal()
-  //   .domain(["Fish", "Insect", "Sea Creature"])
-  //   .range(colors);
-  // const months = [
-  //   "Jan",
-  //   "Feb",
-  //   "Mar",
-  //   "Apr",
-  //   "May",
-  //   "Jun",
-  //   "Jul",
-  //   "Aug",
-  //   "Sep",
-  //   "Oct",
-  //   "Nov",
-  //   "Dec",
-  // ];
-  // const selector = d3.select("#months");
-  // selector
-  //   .selectAll(".month-option")
-  //   .data(months)
-  //   .enter()
-  //   .append("option")
-  //   .classed("month-option", true)
-  //   .attr("value", (d) => d)
-  //   .text((d) => d3.timeFormat("%B")(d3.timeParse("%b")(d)));
-  // function bubbleChart() {
-  //   function createNodes(key, data) {
-  //     const filteredData = data.filter(function (d) {
-  //       return d[`${key}`] != "NA";
-  //     });
-  //     const maxSize = d3.max(filteredData, (d) => d.price);
-  //     const radiusScale = d3.scaleSqrt().domain([0, maxSize]).range([5, 55]);
-  //     const myNodes = filteredData.map((d) => ({
-  //       ...d,
-  //       radius: radiusScale(+d.price),
-  //       x: Math.random() * width_bubble,
-  //       y: Math.random() * height_bubble,
-  //     }));
-  //     return myNodes;
-  //   }
-  //   let chart = function chart(hemisphere, month, rawData) {
-  //     const centre = { x: width / 2 + 100, y: height / 2 + 100 };
-  //     const forceStrength = 0.03;
-  //     function charge(d) {
-  //       return Math.pow(d.radius, 2.0) * 0.01;
-  //     }
-  //     const simulation = d3
-  //       .forceSimulation()
-  //       .force("charge", d3.forceManyBody().strength(charge))
-  //       .force("center", d3.forceCenter(centre.x, centre.y))
-  //       .force("x", d3.forceX().strength(forceStrength).x(centre.x))
-  //       .force("y", d3.forceY().strength(forceStrength).y(centre.y))
-  //       .force(
-  //         "collision",
-  //         d3.forceCollide().radius((d) => d.radius + 5)
-  //       );
-  //     const key = hemisphere + " " + month;
-  //     nodes = createNodes(key, rawData);
-  //     d3.selectAll(".critter-info").text("");
-  //     d3.select(".selected").classed("selected", false);
-  //     defs
-  //       .selectAll(".critter-pattern")
-  //       .data(nodes, (d) => d.id)
-  //       .enter()
-  //       .append("pattern")
-  //       .attr("class", "critter-pattern")
-  //       .attr("id", (d) => d.id)
-  //       .attr("height", "100%")
-  //       .attr("width", "100%")
-  //       .attr("patternContentUnits", "objectBoundingBox")
-  //       .append("image")
-  //       .attr("height", 1)
-  //       .attr("width", 1)
-  //       .attr("preserveAspectRatio", "none")
-  //       .attr("xlink:href", (d) => d.image_url)
-  //       .exit()
-  //       .remove();
-  //     const elements = svg_bubble.selectAll(".bubble").data(nodes, (d) => d.id);
-  //     elements.exit().remove();
-  //     old_bubbles = elements.select("circle");
-  //     const data_enter = elements.enter().append("g").classed("bubble", true);
-  //     bubbles = data_enter
-  //       .append("circle")
-  //       .attr("r", (d) => d.radius)
-  //       .attr("fill", (d) => "url(#" + d.id + ")")
-  //       .attr("stroke", (d) => fillColour(d.type))
-  //       .attr("stroke-width", "6px")
-  //       .attr("id", (d) => "bubble-" + d.id)
-  //       .on("mouseover", (event) => mouseOver(event))
-  //       .on("mouseleave", (event) => mouseLeave(event))
-  //       .on("click", (event, d) => bubbleClick(event, d));
-  //     function mouseOver(event) {
-  //       const bubble = event.target.id;
-  //       d3.select("#" + bubble).attr("stroke", "red");
-  //     }
-  //     function mouseLeave(event) {
-  //       const bubble = event.target.id;
-  //       d3.select("#" + bubble).attr("stroke", (d) => fillColour(d.type));
-  //     }
-  //     function bubbleClick(event, d) {
-  //       const bubble = event.target.id;
-  //       d3.select("#critter-name").text(`${d.name}`);
-  //       d3.select("#critter-type").text(`Type: ${d.type}`);
-  //       d3.select("#critter-price").text(`Price: $${d.price}`);
-  //       d3.select("#critter-time-availability").text("Time: " + d[`${key}`]);
-  //       d3.select(".selected").classed("selected", false);
-  //       d3.select("#" + bubble).classed("selected", true);
-  //       const keys = [
-  //         "location",
-  //         "weather",
-  //         "shadow",
-  //         "speed",
-  //         "catch_difficulty",
-  //         "vision",
-  //         "catches_to_unlock",
-  //         "spawn_rate",
-  //       ];
-  //       keys.forEach((key) => {
-  //         const parsed_key = (
-  //           key.charAt(0).toUpperCase() + key.slice(1)
-  //         ).replaceAll("_", " ");
-  //         if (d[`${key}`] !== undefined) {
-  //           d3.select(`#critter-${key}`).text(parsed_key + ": " + d[`${key}`]);
-  //         } else {
-  //           d3.select(`#critter-${key}`).text(``).attr("display", "none");
-  //         }
-  //       });
-  //     }
-  //     simulation.nodes(nodes).on("tick", ticked).restart();
-  //     const manejadorZoom = (evento) => {
-  //       const transformacion = evento.transform;
-  //       bubbles.attr("transform", transformacion);
-  //       old_bubbles.attr("transform", transformacion);
-  //     };
-  //     const zoom = d3
-  //       .zoom()
-  //       .extent([
-  //         [0, 0],
-  //         [width, height],
-  //       ])
-  //       .translateExtent([
-  //         [-100, -300],
-  //         [width + 100, height + 300],
-  //       ])
-  //       .scaleExtent([1, 4])
-  //       .on("zoom", manejadorZoom);
-  //     svg_bubble.call(zoom);
-  //   };
-  //   function ticked() {
-  //     bubbles.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
-  //     old_bubbles.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
-  //   }
-  //   return chart;
-  // }
-  // let myBubbleChart = bubbleChart();
-  // function capitalizeName(name) {
-  //   const arr = name.split(" ");
-  //   for (var i = 0; i < arr.length; i++) {
-  //     arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
-  //   }
-  //   const str2 = arr.join(" ");
-  //   return str2;
-  // }
-  // async function initialLoad() {
-  //   const fish = await d3.csv("data/fish.csv", function (d) {
-  //     const data = {
-  //       id: +d._id + 100,
-  //       type: "Fish",
-  //       name: capitalizeName(d.Name),
-  //       image_url: d["Icon Image"],
-  //       price: +d.Sell,
-  //       location: d["Where/How"],
-  //       shadow: d.Shadow,
-  //       catch_difficulty: d["Catch Difficulty"],
-  //       vision: d.Vision,
-  //       catches_to_unlock: +d["Total Catches to Unlock"],
-  //       spawn_rate: d["Spawn Rates"],
-  //     };
-  //     const n_hemisphere = addMonths(d, "NH"),
-  //       s_hemisphere = addMonths(d, "SH");
-  //     return { ...data, ...n_hemisphere, ...s_hemisphere };
-  //   });
-  //   const insects = await d3.csv("data/insects.csv", function (d) {
-  //     const data = {
-  //       id: +d._id + 200,
-  //       type: "Insect",
-  //       name: capitalizeName(d.Name),
-  //       image_url: d["Icon Image"],
-  //       price: +d.Sell,
-  //       location: d["Where/How"],
-  //       weather: d.Weather,
-  //       catches_to_unlock: +d["Total Catches to Unlock"],
-  //       spawn_rate: d["Spawn Rates"],
-  //     };
-  //     const n_hemisphere = addMonths(d, "NH"),
-  //       s_hemisphere = addMonths(d, "SH");
-  //     return { ...data, ...n_hemisphere, ...s_hemisphere };
-  //   });
-  //   const sea_creatures = await d3.csv("data/sea_creatures.csv", function (d) {
-  //     const data = {
-  //       id: +d._id + 300,
-  //       type: "Sea Creature",
-  //       name: capitalizeName(d.Name),
-  //       image_url: d["Icon Image"],
-  //       price: +d.Sell,
-  //       shadow: d.Shadow,
-  //       speed: d["Movement Speed"],
-  //       catches_to_unlock: +d["Total Catches to Unlock"],
-  //       spawn_rate: d["Spawn Rates"],
-  //     };
-  //     const n_hemisphere = addMonths(d, "NH"),
-  //       s_hemisphere = addMonths(d, "SH");
-  //     return { ...data, ...n_hemisphere, ...s_hemisphere };
-  //   });
-  //   const data = [...fish, ...insects, ...sea_creatures];
-  //   myBubbleChart("NH", "Jan", data);
-  //   const hemisphereSelector = d3.select("#hemispheres-2").on("change", onChange);
-  //   const monthSelector = d3.select("#months").on("change", onChange);
-  //   function onChange() {
-  //     hemisphere = d3.select("#hemispheres-2").property("value");
-  //     month = d3.select("#months").property("value");
-  //     myBubbleChart(hemisphere, month, data);
-  //   }
-  // }
-  // initialLoad();
-};
+
+const escalaRadio = d3.scaleLog()
+                      .domain([d3.min(dataset, (d) => d.Dimensions), d3.max(dataset, (d) => (d.Dimensions))])
+                      .range([2, 25]);
+
+  var root = d3.hierarchy(dataset)
+  // .sum(function(d) { return d.value; })
+  // .sort(function(a, b) { return b.value - a.value; });
+  var pack = d3.pack()
+               .size([WIDTH3, HEIGHT3])
+               .padding(3);
+  pack(root);
+
+  var node = SVG3.append("g")
+  .selectAll("circle")
+  .data(dataset)
+  .enter()
+  .append("circle")
+    .attr("r", (d) => escalaRadio(d.Dimensions))
+    .attr("cx", WIDTH3 / 2)
+    .attr("cy", HEIGHT3 / 2)
+    .style("fill", (d) => color[d.Object_Type])
+    .style("fill-opacity", 0.3)
+    .attr("stroke", "black")
+    .style("stroke-width", 4)
+    .call(d3.drag() // call specific function when circle is dragged
+         .on("start", dragstarted)
+         .on("drag", dragged)
+         .on("end", dragended));
+
+  // Features of the forces applied to the nodes:
+var simulation = d3.forceSimulation()
+.force("center", d3.forceCenter().x(WIDTH3 / 2).y(HEIGHT3 / 2)) // Attraction to the center of the svg area
+.force("charge", d3.forceManyBody().strength(1)) // Nodes are attracted one each other of value is > 0
+.force("collide", d3.forceCollide().strength(.1).radius(30).iterations(1)) // Force that avoids circle overlapping
+
+// Apply these forces to the nodes and update their positions.
+// Once the force algorithm is happy with positions ('alpha' value is low enough), simulations will stop.
+simulation
+.nodes(dataset)
+.on("tick", function(d){
+  node
+      .attr("cx", function(d){ return d.x; })
+      .attr("cy", function(d){ return d.y; })
+});
+
+// What happens when a circle is dragged?
+function dragstarted(d) {
+if (!d3.event.active) simulation.alphaTarget(.03).restart();
+d.fx = d.x;
+d.fy = d.y;
+}
+function dragged(d) {
+d.fx = d3.event.x;
+d.fy = d3.event.y;
+}
+function dragended(d) {
+if (!d3.event.active) simulation.alphaTarget(.03);
+d.fx = null;
+d.fy = null;
+}
+  
+  // node.append("circle")
+  // .attr("r", (d) => escalaRadio(d.Dimensions))
+
+  // node.append("text")
+  // .attr("dy", ".35em")
+  // .text(function(d) { return d.Messier; });
+
+
+  // SVG3
+  // .selectAll("circle")
+  // .data(dataset)
+  // .join("circle")
+  // .attr("r", (d) => escalaRadio(d.Dimensions))
+  // .attr("fill", (d) => color[d.Object_Type])
+  // .attr("cx", 100)
+  // .attr("cy", 100)
+}
 
 d3.selectAll(".txt").style("fill", "white");

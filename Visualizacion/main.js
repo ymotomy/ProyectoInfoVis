@@ -368,50 +368,72 @@ function createVis2(dataset) {
 // VISUALIZACION 3 ----------------------------------------------------------------------------------------------------------------------
 const WIDTH3 = 1200,
       HEIGHT3 = 800;
+const forceStrength = 0.03;
 
 const SVG3 = d3.select("#vis-3").append("svg").attr("id", "cp");
 
 SVG3.attr("width", WIDTH3).attr("height", HEIGHT3);
 
 function createVis3(dataset) {
+  console.log(dataset);
 
+    const rmin = d3.min(dataset, (d) => d.Dimensions)
+    const rmax = d3.max(dataset, (d) => d.Dimensions)
 const escalaRadio = d3.scaleLog()
-                      .domain([d3.min(dataset, (d) => d.Dimensions), d3.max(dataset, (d) => (d.Dimensions))])
-                      .range([2, 25]);
+                      .domain([rmin, rmax])
+                      .range([10, 50])
+                      .clamp(true);
 
-  var root = d3.hierarchy(dataset)
-  // .sum(function(d) { return d.value; })
-  // .sort(function(a, b) { return b.value - a.value; });
-  var pack = d3.pack()
-               .size([WIDTH3, HEIGHT3])
-               .padding(3);
-  pack(root);
+  // m42 -> 16.92
+  // m27 -> 196.38
 
+  function charge(d) {
+    return Math.pow(escalaRadio(d.Dimensions), 2.0) * 0.01;
+  }
+
+  var defs = SVG3.append("defs");
+
+  defs.selectAll("pattern")
+    .data(dataset)
+    .enter()
+    .append("pattern")
+      .attr("id", (d) => "img" + d.Messier)
+      .attr("width", "1")
+      .attr("height", "1")
+      .attr("patternUnits", "objectBoundingBox")
+      .append("image")
+        .attr("href", (d) => "img/" + d.Messier + ".png")
+        .attr("width", (d) => 2 * escalaRadio(d.Dimensions))
+        .attr("height", (d) => 2 * escalaRadio(d.Dimensions));
+  
   var node = SVG3.append("g")
-  .selectAll("circle")
-  .data(dataset)
-  .enter()
-  .append("circle")
-    .attr("r", (d) => escalaRadio(d.Dimensions))
-    .attr("cx", WIDTH3 / 2)
-    .attr("cy", HEIGHT3 / 2)
-    .style("fill", (d) => color[d.Object_Type])
-    .style("fill-opacity", 0.3)
-    .attr("stroke", "black")
-    .style("stroke-width", 4)
-    .call(d3.drag() // call specific function when circle is dragged
-         .on("start", dragstarted)
-         .on("drag", dragged)
-         .on("end", dragended));
+    .selectAll("circle")
+    .data(dataset)
+    .enter()
+    .append("circle")
+      .attr("class", (d) => d.Messier)
+      .attr("r", (d) => escalaRadio(d.Dimensions))
+      .attr("cx", WIDTH3 / 2)
+      .attr("cy", HEIGHT3 / 2)
+      .attr("fill", (d) => "url(#img" + d.Messier + ")")
+      .attr("stroke", (d) => color[d.Object_Type])
+      .style("stroke-width", 2)
+      .call(d3.drag() // call specific function when circle is dragged
+           .on("start", dragstarted)
+           .on("drag", dragged)
+           .on("end", dragended));
 
-  // Features of the forces applied to the nodes:
-var simulation = d3.forceSimulation()
-.force("center", d3.forceCenter().x(WIDTH3 / 2).y(HEIGHT3 / 2)) // Attraction to the center of the svg area
-.force("charge", d3.forceManyBody().strength(1)) // Nodes are attracted one each other of value is > 0
-.force("collide", d3.forceCollide().strength(.1).radius(30).iterations(1)) // Force that avoids circle overlapping
+const simulation = d3
+      .forceSimulation()
+      .force("charge", d3.forceManyBody().strength(charge))
+      .force("center", d3.forceCenter().x(WIDTH3 / 2).y(HEIGHT3 / 2))
+      .force("x", d3.forceX().strength(0).x(WIDTH3 / 2))
+      .force("y", d3.forceY().strength(0).y(HEIGHT3 / 2))
+      .force(
+        "collision",
+        d3.forceCollide().radius((d) => escalaRadio(d.Dimensions) + 2)
+      );
 
-// Apply these forces to the nodes and update their positions.
-// Once the force algorithm is happy with positions ('alpha' value is low enough), simulations will stop.
 simulation
 .nodes(dataset)
 .on("tick", function(d){
@@ -435,23 +457,6 @@ if (!d3.event.active) simulation.alphaTarget(.03);
 d.fx = null;
 d.fy = null;
 }
-  
-  // node.append("circle")
-  // .attr("r", (d) => escalaRadio(d.Dimensions))
-
-  // node.append("text")
-  // .attr("dy", ".35em")
-  // .text(function(d) { return d.Messier; });
-
-
-  // SVG3
-  // .selectAll("circle")
-  // .data(dataset)
-  // .join("circle")
-  // .attr("r", (d) => escalaRadio(d.Dimensions))
-  // .attr("fill", (d) => color[d.Object_Type])
-  // .attr("cx", 100)
-  // .attr("cy", 100)
 }
 
 d3.selectAll(".txt").style("fill", "white");

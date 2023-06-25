@@ -1,4 +1,4 @@
-let dataset = d3.csv('data/dataset2.csv', d => {
+let dataset = d3.csv('data/dataset3.csv', d => {
     return {
       Messier: d.Messier,
       NGC: d.NGC,
@@ -6,8 +6,8 @@ let dataset = d3.csv('data/dataset2.csv', d => {
       Magnitude: parseInt(d.Magnitude),
       Constellation: d.Constellation,
       Distance: parseInt(d.Distance),
-      Dimensions: d.Dimensions,
-      Discoverer: (d.Discoverer/3.14)**(0.5),
+      Dimensions: (d.Dimensions/3.14)**(0.5),
+      Discoverer: d.Discoverer,
       Year: d.Year,
       Name: d.Name
     };

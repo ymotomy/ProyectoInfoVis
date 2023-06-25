@@ -106,59 +106,79 @@
                     <h4>Tipos de datos a utilizar en el proyecto</h4>
                     <!-- Puedes agregar los P que sean necesarios -->
                     <h4>Respuesta:</h4>
-                    <p>Información de objetos astrónomicos del Catálogo Messier</p>
+                    <p>Un archivo .csv con objetos astrónomicos del Catálogo Messier</p>
                 </div>
                 <div class="response">
                     <h4>Tipos de atributos presente en los datos</h4>
                     <!-- Puedes agregar los P que sean necesarios -->
                     <h4>Respuesta:</h4>
+                    <p>
+                        Los datos singulares identificados a partir del framework de Tamara Munzner son los siguientes:
+                        <ul>
+                            <li><strong>Ítems:</strong> Cuerpos celestes</li>
+                            <li><strong>Atributos:</strong> Nombres de las Columnas</li>
+                            <li><strong>Enlaces:</strong> Potencialmente, relaciones basadas en la constelación o el descubridor</li>
+                            <li><strong>Posiciones:</strong> No explícitas, pero potencialmente inferibles a partir de la constelación y la distancia.</li>
+                        </ul>
+                    </p>
                     <p>Estos objetos astronómicos tienen los siguientes atributos
-                    <table>
-                        <tr>
-                            <th>Atributo</th>
-                            <th>Descripción</th>
-                        </tr>
-                        <tr>
-                            <td>Messier</td>
-                            <td>Nombre del cuerpo en el catalogo</td>
-                        </tr>
-                        <tr>
-                            <td>NGC</td>
-                            <td>Nombre del cuerpo en el New General Catalogue</td>
-                        </tr>
-                        <tr>
-                            <td>Object_Type</td>
-                            <td>Tipo de Objeto (supernova, galaxia, cumulo, etc)</td>
-                        </tr>
-                        <tr>
-                            <td>Magnitude</td>
-                            <td>Brillo del cuerpo celeste</td>
-                        </tr>
-                        <tr>
-                            <td>Constellation</td>
-                            <td>Constelación en la que se encuentra el cuerpo</td>
-                        </tr>
-                        <tr>
-                            <td>Distance</td>
-                            <td>Distancia en años luz del cuerpo a la Tierra</td>
-                        </tr>
-                        <tr>
-                            <td>Dimensions</td>
-                            <td>Tamaño del cuerpo en la esfera celeste</td>
-                        </tr>
-                        <tr>
-                            <td>Discover</td>
-                            <td>Persona que descubrió el cuerpo</td>
-                        </tr>
-                        <tr>
-                            <td>Year</td>
-                            <td>Año en el que fue descubierto</td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>Nombre conocido del cuerpo</td>
-                        </tr>
-                    </table>
+                        <table>
+                            <tr>
+                                <th>Atributo</th>
+                                <th>Descripción</th>
+                                <th>Tipo de Atributo</th>
+                            </tr>
+                            <tr>
+                                <td>Messier</td>
+                                <td>Nombre del cuerpo en el catalogo</td>
+                                <td>Identificador</td>
+                            </tr>
+                            <tr>
+                                <td>NGC</td>
+                                <td>Nombre del cuerpo en el New General Catalogue</td>
+                                <td>Identificador</td>
+                            </tr>
+                            <tr>
+                                <td>Object_Type</td>
+                                <td>Tipo de Objeto (supernova, galaxia, cumulo, etc)</td>
+                                <td>Categórico</td>
+                            </tr>
+                            <tr>
+                                <td>Magnitude</td>
+                                <td>Brillo del cuerpo celeste</td>
+                                <td>Cuantitativo</td>
+                            </tr>
+                            <tr>
+                                <td>Constellation</td>
+                                <td>Constelación en la que se encuentra el cuerpo</td>
+                                <td>Categórico</td>
+                            </tr>
+                            <tr>
+                                <td>Distance</td>
+                                <td>Distancia en años luz del cuerpo a la Tierra</td>
+                                <td>Cuantitativo</td>
+                            </tr>
+                            <tr>
+                                <td>Dimensions</td>
+                                <td>Tamaño del cuerpo en la esfera celeste</td>
+                                <td>Cuantitativo</td>
+                            </tr>
+                            <tr>
+                                <td>Discoverer</td>
+                                <td>Persona que descubrió el cuerpo</td>
+                                <td>Categórico</td>
+                            </tr>
+                            <tr>
+                                <td>Year</td>
+                                <td>Año en el que fue descubierto</td>
+                                <td>Ordenado</td>
+                            </tr>
+                            <tr>
+                                <td>Name</td>
+                                <td>Nombre conocido del cuerpo</td>
+                                <td>Categórico</td>
+                            </tr>
+                        </table>
                     </p>
                     <p><strong>Nota:</strong> No todos los cuerpos tienen todos los atributos</p>
                 </div>
@@ -166,18 +186,47 @@
 
         <div class="case">
             <h2>Abstracción de tareas</h2>
-                <div class="response">
-                    <h4>Tarea 1 (acción + objetivo) + justificación según el dominio presentado</h4>
-                    <!-- Puedes agregar los P que sean necesarios -->
-                    <h4>Respuesta:</h4>
-                    <p>Modifica solo este texto (no el de arriba) para poner tu respuesta</p>
-                </div>
+<div class="response">
+    <h4>Tarea 1 (acción + objetivo) + justificación según el dominio presentado</h4>
+    <h4>Respuesta:</h4>
+    <ul>
+        <li><strong>Acción:</strong> Navegar
+            <ul>
+                <li>Panorámica y zoom para explorar los cuerpos celestes.</li>
+                <li>Pasar el mouse sobre un cuerpo celeste para obtener información detallada.</li>
+            </ul>
+        </li>
+        <li><strong>Objetivo:</strong> Identificar y aprender sobre los cuerpos celestes.
+            <ul>
+                <li>Identificar cuerpos celestes por imagen.</li>
+                <li>Aprender detalles sobre los cuerpos celestes, incluyendo cuándo fueron descubiertos, por quién, qué tipo de cuerpo son, etc.</li>
+            </ul>
+        </li>
+        <li><strong>Justificación:</strong> Esta tarea permite a los usuarios explorar visualmente los cuerpos celestes y obtener información detallada sobre ellos de una manera interactiva e intuitiva. La capacidad de hacer zoom y panorámica permite a los usuarios explorar a su propio ritmo y nivel de detalle, mientras que la información emergente proporciona un contexto y detalles adicionales sin sobrecargar la visualización principal.</li>
+    </ul>
+</div>
+
+
                 <div class="response">
                     <h4>Tarea 2 (acción + objetivo) + justificación según el dominio presentado</h4>
-                    <!-- Puedes agregar los P que sean necesarios -->
                     <h4>Respuesta:</h4>
-                    <p>Modifica solo este texto (no el de arriba) para poner tu respuesta</p>
+                    <ul>
+                        <li><strong>Acción:</strong> Buscar
+                            <ul>
+                                <li>Observar las líneas del gráfico para entender la evolución de la cantidad de objetos descubiertos por año.</li>
+                                <li>Identificar las diferencias entre los tipos de objetos por color.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Objetivo:</strong> Comprender la evolución temporal de los descubrimientos de objetos celestes.
+                            <ul>
+                                <li>Identificar tendencias en la cantidad de objetos descubiertos a lo largo del tiempo.</li>
+                                <li>Comparar la cantidad de diferentes tipos de objetos descubiertos a lo largo del tiempo.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Justificación:</strong> Esta tarea permite a los usuarios entender cómo ha cambiado la cantidad de descubrimientos de objetos celestes a lo largo del tiempo, y cómo estas tendencias varían entre diferentes tipos de objetos. La visualización de líneas facilita la identificación de tendencias y patrones a lo largo del tiempo, y el uso de colores diferentes para diferentes tipos de objetos permite comparaciones fáciles entre categorías.</li>
+                    </ul>
                 </div>
+
                 <div class="response">
                     <h4>Tarea 3 (acción + objetivo) + justificación según el dominio presentado</h4>
                     <!-- Puedes agregar los P que sean necesarios -->

@@ -1,4 +1,4 @@
-let dataset = d3.csv('data/dataset2.csv', d => {
+let dataset = d3.csv('data/dataset3.csv', d => {
     return {
       Messier: d.Messier,
       NGC: d.NGC,

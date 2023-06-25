@@ -416,8 +416,8 @@ const escalaRadio = d3.scaleLog()
       .attr("cx", WIDTH3 / 2)
       .attr("cy", HEIGHT3 / 2)
       .attr("fill", (d) => "url(#img" + d.Messier + ")")
-      .attr("stroke", "white")
-      .style("stroke-width", 1)
+      .attr("stroke", (d) => color[d.Object_Type])
+      .style("stroke-width", 2)
       .call(d3.drag() // call specific function when circle is dragged
            .on("start", dragstarted)
            .on("drag", dragged)
@@ -431,7 +431,7 @@ const simulation = d3
       .force("y", d3.forceY().strength(0).y(HEIGHT3 / 2))
       .force(
         "collision",
-        d3.forceCollide().radius((d) => escalaRadio(d.Dimensions) + 1)
+        d3.forceCollide().radius((d) => escalaRadio(d.Dimensions) + 2)
       );
 
 simulation

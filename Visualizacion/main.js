@@ -5,6 +5,14 @@ const MARGIN = {
   left: 40,
   right: 60,
 };
+
+var color = {
+  Galaxy: "#f72585",
+  "Globular Cluster": "#00fff5",
+  "Open Cluster": "#0077b6",
+  Nebula: "#d00000",
+  "Double star": "#66FF00",
+};
 // VISUALIZACION 1 ----------------------------------------------------------------------------------------------------------------------
 let zoomActual = d3.zoomIdentity;
 
@@ -20,7 +28,6 @@ SVG1info.attr("width", WIDTH1info).attr("height", HEIGHT1info);
 SVG1objects.attr("width", WIDTH1objects).attr("height", HEIGHT1objects);
 
 const contenedorImagenes = SVG1objects.append("g").attr("class", "img");
-// const tierra = SVG1objects.append("g").attr("id", "tierra");
 const contenedorEjeTiempo = SVG1objects.append("g");
 
 const info1 = SVG1info.append("g").style("visibility", "hidden");
@@ -84,48 +91,64 @@ function createVis1(dataset) {
   .attr("transform", `translate(${MARGIN.left}, ${HEIGHT1objects / 2 + 100})`)
   .call(ejeX);
 
-  // tierra
-  //   .append("circle")
-  //   .attr("r", 50)
-  //   .attr("stroke", "white")
-  //   .attr("stroke-width", 3)
-  //   .attr("cx", 52)
-  //   .attr("cy", HEIGHT1objects / 2);
+  let selectedElement = null; // Variable para realizar el seguimiento del elemento seleccionado
 
-  contenedorImagenes
-    .selectAll("image")
-    .data(dataset)
-    .join(
-      (enter) => {
-        enter
-          .append("image")
-          .attr("id", (d) => d.Messier)
-          .attr("xlink:href", (d) => "img/" + d.Messier + ".png") // Reemplaza "imagenURL" por la propiedad de tu objeto que contiene la URL de la imagen
-          .attr("x", (d, i) => escalaDistance(d.Distance)) // Ajusta la posición horizontal de la imagen
-          .attr("y", HEIGHT1objects / 2 - 44) // Ajusta la posición vertical de la imagen
-          .attr("width", 88) // Ajusta el ancho de la imagen
-          .attr("height", 88) // Ajusta la altura de la imagen
-          .on("mouseover", function (event, d) {
-            info11.text(`${d.Name}`); //Common_Name
-            info12.text(`${d.Messier}`); //Messier
-            info13.text(`${d.NGC}`); //NGC
-            info14.text(`Descubierto en: ${d.Year}`); //Year
-            info15.text(`Tipo de Objeto: ${d.Object_Type}`); //OBject_Type
-            info16.text(`Constelación: ${d.Constellation}`); //Constellation
-            info17.text(`Distancia: ${d.Distance} al`); //Distance
-            info18.text(`Magnitud: ${d.Magnitude}`); //Magnitude
-            info19.text(`Descubierto por: ${d.Discoverer}`); //Discoverer
-            info1.style("visibility", "visible");
-          })
-          .on("mouseout", () => {
+contenedorImagenes
+  .selectAll("image")
+  .data(dataset)
+  .join(
+    (enter) => {
+      enter
+        .append("image")
+        .attr("class", (d) => d.Messier)
+        .attr("xlink:href", (d) => "img/" + d.Messier + ".png")
+        .attr("x", (d, i) => escalaDistance(d.Distance))
+        .attr("y", HEIGHT1objects / 2 - 44)
+        .attr("width", 88)
+        .attr("height", 88)
+        .style("border", "2px solid red")
+        .on("click", (event, d) => {
+          if (selectedElement === d) {
+            // Si el elemento ya está seleccionado, se deselecciona al hacer clic nuevamente
+            selectedElement = null;
             info1.style("visibility", "hidden");
-          });
-      },
-      (update) => {
-        update.attr("x", (d, i) => escalaDistance(d.Distance)); // Ajusta la posición horizontal de la imagen
-      },
-      (exit) => exit.remove()
-    );
+          } else {
+            // Si se hace clic en un elemento diferente, se actualiza el elemento seleccionado
+            selectedElement = d;
+            updateInfo(d);
+          }
+        })
+        .on("mouseover", function (event, d) {
+          if (selectedElement !== d) {
+            // Muestra la información solo si el elemento no está seleccionado
+            updateInfo(d);
+          }
+        })
+        .on("mouseout", function (event, d) {
+          if (selectedElement !== d) {
+            // Oculta la información solo si el elemento no está seleccionado
+            info1.style("visibility", "hidden");
+          }
+        });
+    },
+    (update) => {
+      update.attr("x", (d, i) => escalaDistance(d.Distance));
+    },
+    (exit) => exit.remove()
+  );
+
+function updateInfo(d) {
+  info11.text(`${d.Name}`);
+  info12.text(`${d.Messier}`);
+  info13.text(`${d.NGC}`);
+  info14.text(`Descubierto en: ${d.Year}`);
+  info15.text(`Tipo de Objeto: ${d.Object_Type}`);
+  info16.text(`Constelación: ${d.Constellation}`);
+  info17.text(`Distancia: ${d.Distance} al`);
+  info18.text(`Magnitud: ${d.Magnitude}`);
+  info19.text(`Descubierto por: ${d.Discoverer}`);
+  info1.style("visibility", "visible");
+}
   contenedorImagenes
     .append("image")
     .attr("xlink:href", "img/earth.png")
@@ -134,17 +157,9 @@ function createVis1(dataset) {
     .attr("width", 104) // Ajusta el ancho de la imagen
     .attr("height", 104) // Ajusta la altura de la imagen
     .attr("class", "earth")
- //contenedorImagenes
- // .append("rect")
- // .attr("x", 100)
- // .attr("y", HEIGHT1objects / 2 - 44)
- // .attr("width", 50) // Ancho inicial del elemento fijo (puede ajustarse según tus necesidades)
- // .attr("height", 88) // Altura del elemento fijo (puede ajustarse según tus necesidades)
- // .attr("fill", "red");
 
   const manejadorZoom = (evento) => {
     const transformacion = evento.transform;
-    // Obtener la escala y la traslación solo en el eje X
     const escalaX = transformacion.k;
     const traslacionX = transformacion.x;
 
@@ -158,7 +173,6 @@ function createVis1(dataset) {
       .attr("x", (d) => escalaX * escalaDistance(d.Distance) + traslacionX);
     contenedorImagenes.select(".earth")
       .attr("x", traslacionX) // Actualiza la posición horizontal según la traslación del zoom
-      .attr("width", tamanoFijo / transformacion.k);
       
   };
 
@@ -171,14 +185,6 @@ function createVis1(dataset) {
     .on("zoom", manejadorZoom)
     .on("start", () => console.log("empecé"))
     .on("end", () => console.log("Terminé"));
-    
-
-  // Seteamos que el valor que el zoom tiene actualmente
-  // es el zoom que se realizó la vez pasada
-  //SVG1objects.call(zoom.transform, zoomActual)
-  // Conectar el zoom al svg
-  //contenedorImagenes.call(zoom);
-  //contenedorEjeTiempo.call(zoom);
   SVG1objects.call(zoom);
 }
 
@@ -193,14 +199,6 @@ SVG2.attr("width", WIDTH2).attr("height", HEIGHT2);
 d3.select("#vis-2").append("svg").style("width", "20px");
 const SVG2info = d3.select("#vis-2").append("svg").attr("id", "info-2");
 SVG2info.attr("width", WIDTH2info).attr("height", HEIGHT2info);
-
-var color = {
-  Galaxy: "#f72585",
-  "Globular Cluster": "#00fff5",
-  "Open Cluster": "#0077b6",
-  Nebula: "#d00000",
-  "Double star": "#66FF00",
-};
 
 const info2 = SVG2info.append("g");
 const info21 = info2
@@ -387,7 +385,7 @@ function createVis2(dataset) {
 
 // VISUALIZACION 3 ----------------------------------------------------------------------------------------------------------------------
 const WIDTH3 = 1200,
-  HEIGHT3 = 800;
+  HEIGHT3 = 900;
 const forceStrength = 0.03;
 
 const SVG3 = d3.select("#vis-3").append("svg").attr("id", "cp");
@@ -404,9 +402,6 @@ function createVis3(dataset) {
     .domain([rmin, rmax])
     .range([10, 50])
     .clamp(true);
-
-  // m42 -> 16.92
-  // m27 -> 196.38
 
   function charge(d) {
     return Math.pow(escalaRadio(d.Dimensions), 2.0) * 0.01;
@@ -475,7 +470,7 @@ function createVis3(dataset) {
     )
     .force(
       "collision",
-      d3.forceCollide().radius((d) => escalaRadio(d.Dimensions) + 2)
+      d3.forceCollide().radius((d) => escalaRadio(d.Dimensions) + 4)
     );
 
   simulation.nodes(dataset).on("tick", function (d) {
@@ -489,17 +484,17 @@ function createVis3(dataset) {
   });
 
   // What happens when a circle is dragged?
-  function dragstarted(d) {
-    if (!d3.event.active) simulation.alphaTarget(0.03).restart();
+  function dragstarted(event, d) {
+    if (!event.active) simulation.alphaTarget(0.1).restart();
     d.fx = d.x;
     d.fy = d.y;
   }
-  function dragged(d) {
-    d.fx = d3.event.x;
-    d.fy = d3.event.y;
+  function dragged(event, d) {
+    d.fx = event.x;
+    d.fy = event.y;
   }
-  function dragended(d) {
-    if (!d3.event.active) simulation.alphaTarget(0.03);
+  function dragended(event, d) {
+    if (!event.active) simulation.alphaTarget(0.1);
     d.fx = null;
     d.fy = null;
   }
@@ -511,17 +506,10 @@ function createVis3(dataset) {
   // Inicializar Zoom
   const zoom = d3
     .zoom()
-    //.extent([[0, 0], [WIDTH1objects, HEIGHT1objects]])
-    //.translateExtent([[0, 0], [WIDTH1objects, HEIGHT1objects]])
     .scaleExtent([1, 8])
     .on("zoom", manejadorZoom)
     .on("start", () => console.log("empecé"))
     .on("end", () => console.log("Terminé"));
-
-  // Seteamos que el valor que el zoom tiene actualmente
-  // es el zoom que se realizó la vez pasada
-  //SVG1objects.call(zoom.transform, zoomActual)
-  // Conectar el zoom al svg
   SVG3.call(zoom);
 }
 

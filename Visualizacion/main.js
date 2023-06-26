@@ -20,8 +20,8 @@ SVG1info.attr("width", WIDTH1info).attr("height", HEIGHT1info);
 SVG1objects.attr("width", WIDTH1objects).attr("height", HEIGHT1objects);
 
 const contenedorImagenes = SVG1objects.append("g").attr("class", "img");
-// .attr("transform", `translate(${MARGIN.left} ${MARGIN.top})`);
-const tierra = SVG1objects.append("g").attr("id", "tierra");
+// const tierra = SVG1objects.append("g").attr("id", "tierra");
+const contenedorEjeTiempo = SVG1objects.append("g");
 
 const info1 = SVG1info.append("g").style("visibility", "hidden");
 const info11 = info1
@@ -78,21 +78,19 @@ function createVis1(dataset) {
       d3.max(dataset, (d) => d.Distance),
     ])
     .range([25, WIDTH1objects - MARGIN.left - MARGIN.right]);
+  // Eje X
+  const ejeX = d3.axisBottom(escalaDistance);
+  contenedorEjeTiempo
+  .attr("transform", `translate(${MARGIN.left}, ${HEIGHT1objects / 2 + 100})`)
+  .call(ejeX);
 
-  tierra
-    .append("circle")
-    .attr("r", 50)
-    .attr("stroke", "white")
-    .attr("stroke-width", 3)
-    .attr("cx", 52)
-    .attr("cy", HEIGHT1objects / 2);
-  tierra
-    .append("image")
-    .attr("xlink:href", "img/earth.png")
-    .attr("x", 0) // Ajusta la posición horizontal de la imagen
-    .attr("y", HEIGHT1objects / 2 - 52) // Ajusta la posición vertical de la imagen
-    .attr("width", 104) // Ajusta el ancho de la imagen
-    .attr("height", 104); // Ajusta la altura de la imagen
+  // tierra
+  //   .append("circle")
+  //   .attr("r", 50)
+  //   .attr("stroke", "white")
+  //   .attr("stroke-width", 3)
+  //   .attr("cx", 52)
+  //   .attr("cy", HEIGHT1objects / 2);
 
   contenedorImagenes
     .selectAll("image")
@@ -128,37 +126,59 @@ function createVis1(dataset) {
       },
       (exit) => exit.remove()
     );
+  contenedorImagenes
+    .append("image")
+    .attr("xlink:href", "img/earth.png")
+    .attr("x", 0) // Ajusta la posición horizontal de la imagen
+    .attr("y", HEIGHT1objects / 2 - 52) // Ajusta la posición vertical de la imagen
+    .attr("width", 104) // Ajusta el ancho de la imagen
+    .attr("height", 104) // Ajusta la altura de la imagen
+    .attr("class", "earth")
+ //contenedorImagenes
+ // .append("rect")
+ // .attr("x", 100)
+ // .attr("y", HEIGHT1objects / 2 - 44)
+ // .attr("width", 50) // Ancho inicial del elemento fijo (puede ajustarse según tus necesidades)
+ // .attr("height", 88) // Altura del elemento fijo (puede ajustarse según tus necesidades)
+ // .attr("fill", "red");
 
   const manejadorZoom = (evento) => {
     const transformacion = evento.transform;
-    // Actualizamos el rango de la escala considerando la transformación realizada.
-    //escalaDistance.range([transformacion.applyX(0), transformacion.applyX(WIDTH1objects - MARGIN.right - MARGIN.left)])
-    // Actualizamos posición en X y ancho de las barras considerando la nueva escala.
-    contenedorImagenes.attr("transform", transformacion);
-    //.selectAll("image")
-    //.attr("x", (d) => escalaDistance(d.Distance) + escalaDistance.bandwidth() / 4)
-    //.attr("width", escalaDistance.bandwidth() / 2)
+    // Obtener la escala y la traslación solo en el eje X
+    const escalaX = transformacion.k;
+    const traslacionX = transformacion.x;
 
-    // Actualizamos el ejeX
-    //contenedorImagenes.call(ejeTiempo);
-    // Guardamos dicha transformación en nuestra variable global.
-    //zoomActual = transformacion;
+    // Aplicar la transformación solo en el eje X a las imágenes
+    contenedorEjeTiempo
+    .attr("transform", `translate(${MARGIN.left}, ${HEIGHT1objects / 2 + 100})`)
+    .call(ejeX.scale(transformacion.rescaleX(escalaDistance)));
+    contenedorImagenes
+      .selectAll("image")
+      .data(dataset)
+      .attr("x", (d) => escalaX * escalaDistance(d.Distance) + traslacionX);
+    contenedorImagenes.select(".earth")
+      .attr("x", traslacionX) // Actualiza la posición horizontal según la traslación del zoom
+      .attr("width", tamanoFijo / transformacion.k);
+      
   };
 
   // Inicializar Zoom
   const zoom = d3
     .zoom()
-    //.extent([[0, 0], [WIDTH1objects, HEIGHT1objects]])
-    //.translateExtent([[0, 0], [WIDTH1objects, HEIGHT1objects]])
-    .scaleExtent([1, 8])
+    .extent([[0, 0], [WIDTH1objects, HEIGHT1objects]])
+    .translateExtent([[0, 0], [WIDTH1objects, HEIGHT1objects]])
+    .scaleExtent([1, 110])
     .on("zoom", manejadorZoom)
     .on("start", () => console.log("empecé"))
     .on("end", () => console.log("Terminé"));
+    
 
   // Seteamos que el valor que el zoom tiene actualmente
   // es el zoom que se realizó la vez pasada
   //SVG1objects.call(zoom.transform, zoomActual)
   // Conectar el zoom al svg
+  //contenedorImagenes.call(zoom);
+  //contenedorEjeTiempo.call(zoom);
   SVG1objects.call(zoom);
 }
 
@@ -367,22 +387,23 @@ function createVis2(dataset) {
 
 // VISUALIZACION 3 ----------------------------------------------------------------------------------------------------------------------
 const WIDTH3 = 1200,
-      HEIGHT3 = 800;
+  HEIGHT3 = 800;
 const forceStrength = 0.03;
 
 const SVG3 = d3.select("#vis-3").append("svg").attr("id", "cp");
 
 SVG3.attr("width", WIDTH3).attr("height", HEIGHT3);
-
+const contenedor3 = SVG3.append("g").attr("class", "img");
 function createVis3(dataset) {
   console.log(dataset);
 
-    const rmin = d3.min(dataset, (d) => d.Dimensions)
-    const rmax = d3.max(dataset, (d) => d.Dimensions)
-const escalaRadio = d3.scaleLog()
-                      .domain([rmin, rmax])
-                      .range([10, 50])
-                      .clamp(true);
+  const rmin = d3.min(dataset, (d) => d.Dimensions);
+  const rmax = d3.max(dataset, (d) => d.Dimensions);
+  const escalaRadio = d3
+    .scaleLog()
+    .domain([rmin, rmax])
+    .range([10, 50])
+    .clamp(true);
 
   // m42 -> 16.92
   // m27 -> 196.38
@@ -393,70 +414,115 @@ const escalaRadio = d3.scaleLog()
 
   var defs = SVG3.append("defs");
 
-  defs.selectAll("pattern")
+  contenedor3
+    .selectAll("pattern")
     .data(dataset)
     .enter()
     .append("pattern")
-      .attr("id", (d) => "img" + d.Messier)
-      .attr("width", "1")
-      .attr("height", "1")
-      .attr("patternUnits", "objectBoundingBox")
-      .append("image")
-        .attr("href", (d) => "img/" + d.Messier + ".png")
-        .attr("width", (d) => 2 * escalaRadio(d.Dimensions))
-        .attr("height", (d) => 2 * escalaRadio(d.Dimensions));
-  
-  var node = SVG3.append("g")
+    .attr("id", (d) => "img" + d.Messier)
+    .attr("width", "1")
+    .attr("height", "1")
+    .attr("patternUnits", "objectBoundingBox")
+    .append("image")
+    .attr("href", (d) => "img/" + d.Messier + ".png")
+    .attr("width", (d) => 2 * escalaRadio(d.Dimensions))
+    .attr("height", (d) => 2 * escalaRadio(d.Dimensions));
+
+  var node = contenedor3
+    .append("g")
     .selectAll("circle")
     .data(dataset)
     .enter()
     .append("circle")
-      .attr("class", (d) => d.Messier)
-      .attr("r", (d) => escalaRadio(d.Dimensions))
-      .attr("cx", WIDTH3 / 2)
-      .attr("cy", HEIGHT3 / 2)
-      .attr("fill", (d) => "url(#img" + d.Messier + ")")
-      .attr("stroke", (d) => color[d.Object_Type])
-      .style("stroke-width", 2)
-      .call(d3.drag() // call specific function when circle is dragged
-           .on("start", dragstarted)
-           .on("drag", dragged)
-           .on("end", dragended));
+    .attr("class", (d) => d.Messier)
+    .attr("r", (d) => escalaRadio(d.Dimensions))
+    .attr("cx", WIDTH3 / 2)
+    .attr("cy", HEIGHT3 / 2)
+    .attr("fill", (d) => "url(#img" + d.Messier + ")")
+    .attr("stroke", (d) => color[d.Object_Type])
+    .style("stroke-width", 2)
+    .call(
+      d3
+        .drag() // call specific function when circle is dragged
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended)
+    );
 
-const simulation = d3
-      .forceSimulation()
-      .force("charge", d3.forceManyBody().strength(charge))
-      .force("center", d3.forceCenter().x(WIDTH3 / 2).y(HEIGHT3 / 2))
-      .force("x", d3.forceX().strength(0).x(WIDTH3 / 2))
-      .force("y", d3.forceY().strength(0).y(HEIGHT3 / 2))
-      .force(
-        "collision",
-        d3.forceCollide().radius((d) => escalaRadio(d.Dimensions) + 2)
-      );
+  const simulation = d3
+    .forceSimulation()
+    .force("charge", d3.forceManyBody().strength(charge))
+    .force(
+      "center",
+      d3
+        .forceCenter()
+        .x(WIDTH3 / 2)
+        .y(HEIGHT3 / 2)
+    )
+    .force(
+      "x",
+      d3
+        .forceX()
+        .strength(0)
+        .x(WIDTH3 / 2)
+    )
+    .force(
+      "y",
+      d3
+        .forceY()
+        .strength(0)
+        .y(HEIGHT3 / 2)
+    )
+    .force(
+      "collision",
+      d3.forceCollide().radius((d) => escalaRadio(d.Dimensions) + 2)
+    );
 
-simulation
-.nodes(dataset)
-.on("tick", function(d){
-  node
-      .attr("cx", function(d){ return d.x; })
-      .attr("cy", function(d){ return d.y; })
-});
+  simulation.nodes(dataset).on("tick", function (d) {
+    node
+      .attr("cx", function (d) {
+        return d.x;
+      })
+      .attr("cy", function (d) {
+        return d.y;
+      });
+  });
 
-// What happens when a circle is dragged?
-function dragstarted(d) {
-if (!d3.event.active) simulation.alphaTarget(.03).restart();
-d.fx = d.x;
-d.fy = d.y;
-}
-function dragged(d) {
-d.fx = d3.event.x;
-d.fy = d3.event.y;
-}
-function dragended(d) {
-if (!d3.event.active) simulation.alphaTarget(.03);
-d.fx = null;
-d.fy = null;
-}
+  // What happens when a circle is dragged?
+  function dragstarted(d) {
+    if (!d3.event.active) simulation.alphaTarget(0.03).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+  }
+  function dragged(d) {
+    d.fx = d3.event.x;
+    d.fy = d3.event.y;
+  }
+  function dragended(d) {
+    if (!d3.event.active) simulation.alphaTarget(0.03);
+    d.fx = null;
+    d.fy = null;
+  }
+  const manejadorZoom = (evento) => {
+    const transformacion = evento.transform;
+    contenedor3.attr("transform", transformacion);
+  };
+
+  // Inicializar Zoom
+  const zoom = d3
+    .zoom()
+    //.extent([[0, 0], [WIDTH1objects, HEIGHT1objects]])
+    //.translateExtent([[0, 0], [WIDTH1objects, HEIGHT1objects]])
+    .scaleExtent([1, 8])
+    .on("zoom", manejadorZoom)
+    .on("start", () => console.log("empecé"))
+    .on("end", () => console.log("Terminé"));
+
+  // Seteamos que el valor que el zoom tiene actualmente
+  // es el zoom que se realizó la vez pasada
+  //SVG1objects.call(zoom.transform, zoomActual)
+  // Conectar el zoom al svg
+  SVG3.call(zoom);
 }
 
 d3.selectAll(".txt").style("fill", "white");

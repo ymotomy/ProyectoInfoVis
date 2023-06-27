@@ -174,7 +174,27 @@ function createVis1(dataset) {
     .attr("width", radioTierra * 2) // Ajusta el ancho de la imagen
     .attr("height", radioTierra * 2) // Ajusta la altura de la imagen
     .on("click", (event) => {
-      console.log("click");
+      var elementos = [
+        "Galaxy",
+        "Globular-Cluster",
+        "Open-Cluster",
+        "Nebula",
+        "Double-star",
+      ];
+      for (let elemento of elementos) {
+        d3.selectAll(`.${elemento}`)
+          .style("filter", "saturate(100%)")
+          .style("opacity", "1");
+        d3.selectAll(`.line`)
+          .style("filter", "saturate(100%)")
+          .style("opacity", "1");
+        d3.selectAll(`.img`)
+          .style("filter", "saturate(100%)")
+          .style("opacity", "1");
+        info1.style("visibility", "hidden");
+        object_type = null;
+      }
+      
         contenedorImagenes.selectAll("image").style("filter", "saturate(100%)").style("opacity", "1");
         info1.style("visibility", "hidden");
       });
@@ -538,74 +558,65 @@ function createVis3(dataset) {
   }
 
   contenedor3
-    .selectAll("pattern")
-    .data(dataset)
-    .join(
-      (enter) =>
-        enter
-          .append("pattern")
-          .attr("id", (d) => "img" + d.Messier)
-          .attr("class", (d) => d.Messier + " " + createClass(d.Object_Type))
-          .attr("width", "1")
-          .attr("height", "1")
-          .attr("patternUnits", "objectBoundingBox")
-          .append("image")
-          .attr("href", (d) => "img/" + d.Messier + ".png")
-          .attr("width", (d) => 2 * escalaRadio(d.Dimensions))
-          .attr("height", (d) => 2 * escalaRadio(d.Dimensions))
-          .transition()
-          .duration(TIEMPO_TRANSICION),
-      (update) =>
-        update
-          .attr("id", (d) => "img" + d.Messier)
-          .attr("class", (d) => d.Messier + " " + createClass(d.Object_Type))
-          .attr("width", "1")
-          .attr("height", "1")
-          .attr("patternUnits", "objectBoundingBox")
-          .append("image")
-          .attr("href", (d) => "img/" + d.Messier + ".png")
-          .attr("width", (d) => 2 * escalaRadio(d.Dimensions))
-          .attr("height", (d) => 2 * escalaRadio(d.Dimensions))
-          .transition()
-          .duration(TIEMPO_TRANSICION),
-      (exit) => exit.remove()
-    )
-    .on("click", (event, d) => select_object(createClass(d.Object_Type)));
+  .selectAll("pattern")
+  .data(dataset)
+  .join(
+    (enter) =>
+      enter
+        .append("pattern")
+        .attr("id", (d) => "img" + d.Messier)
+        .attr("class", (d) => d.Messier + " " + createClass(d.Object_Type))
+        .attr("width", "1")
+        .attr("height", "1")
+        .attr("patternUnits", "objectBoundingBox")
+        .append("image")
+        .attr("href", (d) => "img/" + d.Messier + ".png")
+        .attr("width", (d) => 2 * escalaRadio(d.Dimensions))
+        .attr("height", (d) => 2 * escalaRadio(d.Dimensions))
+        .transition()
+        .duration(TIEMPO_TRANSICION),
+    (update) =>
+      update
+        .attr("id", (d) => "img" + d.Messier)
+        .attr("class", (d) => d.Messier + " " + createClass(d.Object_Type))
+        .attr("width", "1")
+        .attr("height", "1")
+        .attr("patternUnits", "objectBoundingBox")
+        .append("image")
+        .attr("href", (d) => "img/" + d.Messier + ".png")
+        .attr("width", (d) => 2 * escalaRadio(d.Dimensions))
+        .attr("height", (d) => 2 * escalaRadio(d.Dimensions))
+        .transition()
+        .duration(TIEMPO_TRANSICION),
+    (exit) => exit.remove()
+  )
+  .on("click", (event, d) => select_object(createClass(d.Object_Type)));
 
-  var node = contenedor3
-    .append("g")
-    .selectAll("circle")
-    .data(dataset)
-    .join(
-      (enter) =>
-        enter
-          .append("circle")
-          .attr("class", (d) => d.Messier + " " + createClass(d.Object_Type))
-          .attr("r", (d) => escalaRadio(d.Dimensions))
-          .attr("cx", WIDTH3 / 2)
-          .attr("cy", HEIGHT3 / 2)
-          .attr("fill", (d) => "url(#img" + d.Messier + ")")
-          .attr("stroke", (d) => color[d.Object_Type])
-          .style("stroke-width", 2),
-      (update) =>
-        update
-          .attr("class", (d) => d.Messier + " " + createClass(d.Object_Type))
-          .attr("r", (d) => escalaRadio(d.Dimensions))
-          .attr("cx", WIDTH3 / 2)
-          .attr("cy", HEIGHT3 / 2)
-          .attr("fill", (d) => "url(#img" + d.Messier + ")")
-          .attr("stroke", (d) => color[d.Object_Type])
-          .style("stroke-width", 2),
-      (exit) => exit.remove()
-    )
-    .on("click", (event, d) => select_object(createClass(d.Object_Type)))
-    .call(
-      d3
-        .drag()
-        .on("start", dragstarted)
-        .on("drag", dragged)
-        .on("end", dragended)
-    );
+var node = contenedor3
+  .append("g")
+  .selectAll("pattern")
+  .data(dataset)
+  .join(
+    (enter) =>
+      enter
+        .append("circle")
+        .attr("class", (d) => d.Messier + " " + createClass(d.Object_Type))
+        .attr("r", (d) => escalaRadio(d.Dimensions))
+        .attr("cx", WIDTH3 / 2)
+        .attr("cy", HEIGHT3 / 2)
+        .attr("fill", (d) => "url(#img" + d.Messier + ")")
+        .attr("stroke", (d) => color[d.Object_Type])
+        .style("stroke-width", 2),
+    (exit) => exit.remove()
+  )
+  .on("click", (event, d) => select_object(createClass(d.Object_Type)))
+  .call(
+    d3
+      .drag()
+      .on("start", dragstarted)
+      .on("drag", dragged)
+      .on("end", dragended)
+  );
 
   const simulation = d3
     .forceSimulation()

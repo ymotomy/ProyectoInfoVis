@@ -65,9 +65,14 @@ body{
     width: 800px;
 }
 
-select, button{
+button{
     background-color: aliceblue;
     color: #020331;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+#circle2{
+    cursor: pointer;
 }

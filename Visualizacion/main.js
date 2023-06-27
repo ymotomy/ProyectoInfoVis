@@ -174,26 +174,7 @@ function createVis1(dataset) {
     .attr("width", radioTierra * 2) // Ajusta el ancho de la imagen
     .attr("height", radioTierra * 2) // Ajusta la altura de la imagen
     .on("click", (event) => {
-      var elementos = [
-        "Galaxy",
-        "Globular-Cluster",
-        "Open-Cluster",
-        "Nebula",
-        "Double-star",
-      ];
-      for (let elemento of elementos) {
-        d3.selectAll(`.${elemento}`)
-          .style("filter", "saturate(100%)")
-          .style("opacity", "1");
-        d3.selectAll(`.line`)
-          .style("filter", "saturate(100%)")
-          .style("opacity", "1");
-        d3.selectAll(`.img`)
-          .style("filter", "saturate(100%)")
-          .style("opacity", "1");
-        info1.style("visibility", "hidden");
-        object_type = null;
-      }
+      reiniciarElementos()
       
         contenedorImagenes.selectAll("image").style("filter", "saturate(100%)").style("opacity", "1");
         info1.style("visibility", "hidden");
@@ -238,6 +219,28 @@ const WIDTH2 = 800,
   HEIGHT2 = 650,
   WIDTH2info = 295,
   HEIGHT2info = 250;
+
+function reiniciarElementos() {
+  var elementos = [
+    "Galaxy",
+    "Globular-Cluster",
+    "Open-Cluster",
+    "Nebula",
+    "Double-star",
+  ];
+  for (let elemento of elementos) {
+    d3.selectAll(`.${elemento}`)
+      .style("filter", "saturate(100%)")
+      .style("opacity", "1");
+    d3.selectAll(`.line`)
+      .style("filter", "saturate(100%)")
+      .style("opacity", "1");
+    d3.selectAll(`.img`)
+      .style("filter", "saturate(100%)")
+      .style("opacity", "1");
+    info1.style("visibility", "hidden");
+    object_type = null;
+  }}
 
 const SVG2 = d3.select("#vis-2").append("svg").attr("id", "gl");
 SVG2.attr("width", WIDTH2).attr("height", HEIGHT2);
@@ -297,6 +300,7 @@ const info26 = info2
 const circle21 = info2
   .append("circle")
   .attr("class", Object.keys(color)[0])
+  .attr("id", "circle2")
   .attr("fill", color[Object.keys(color)[0]])
   .attr("cx", "20")
   .attr("cy", "70")
@@ -308,6 +312,7 @@ const circle21 = info2
 const circle22 = info2
   .append("circle")
   .attr("class", createClass(Object.keys(color)[1]))
+  .attr("id", "circle2")
   .attr("fill", color[Object.keys(color)[1]])
   .attr("cx", "20")
   .attr("cy", "100")
@@ -319,6 +324,7 @@ const circle22 = info2
 const circle23 = info2
   .append("circle")
   .attr("class", createClass(Object.keys(color)[2]))
+  .attr("id", "circle2")
   .attr("fill", color[Object.keys(color)[2]])
   .attr("cx", "20")
   .attr("cy", "130")
@@ -330,6 +336,7 @@ const circle23 = info2
 const circle24 = info2
   .append("circle")
   .attr("class", createClass(Object.keys(color)[3]))
+  .attr("id", "circle2")
   .attr("fill", color[Object.keys(color)[3]])
   .attr("cx", "20")
   .attr("cy", "160")
@@ -341,6 +348,7 @@ const circle24 = info2
 const circle25 = info2
   .append("circle")
   .attr("class", createClass(Object.keys(color)[4]))
+  .attr("id", "circle2")
   .attr("fill", color[Object.keys(color)[4]])
   .attr("cx", "20")
   .attr("cy", "190")
@@ -352,30 +360,12 @@ const circle25 = info2
 const circle26 = info2
   .append("circle")
   .attr("fill", "white")
+  .attr("id", "circle2")
   .attr("cx", "20")
   .attr("cy", "220")
   .attr("r", "7")
   .on("click", () => {
-    var elementos = [
-      "Galaxy",
-      "Globular-Cluster",
-      "Open-Cluster",
-      "Nebula",
-      "Double-star",
-    ];
-    for (let elemento of elementos) {
-      d3.selectAll(`.${elemento}`)
-        .style("filter", "saturate(100%)")
-        .style("opacity", "1");
-      d3.selectAll(`.line`)
-        .style("filter", "saturate(100%)")
-        .style("opacity", "1");
-      d3.selectAll(`.img`)
-        .style("filter", "saturate(100%)")
-        .style("opacity", "1");
-      info1.style("visibility", "hidden");
-      object_type = null;
-    }
+    reiniciarElementos()
   });
 SVG2.append("text")
   .attr("x", 20)
@@ -535,15 +525,10 @@ const SVG3 = d3.select("#vis-3").append("svg").attr("id", "cp");
 SVG3.attr("width", WIDTH3).attr("height", HEIGHT3);
 const contenedor3 = SVG3.append("g").attr("class", "img");
 
-function createVis3(dataset) {
-  console.log(object_type);
-  let FILTER_BY = document.getElementById("filter").selectedOptions[0].value;
-  if (object_type != null && FILTER_BY == "filtrar") {
-    var dataset = d3.filter(dataset, (d) =>
-      d.Object_Type.includes(object_type)
-    );
-    console.log(dataset);
-  }
+function createVis3(dataset, type) {
+  // object_type = type;
+  if (type != "none"){
+  dataset = d3.filter(dataset, (d) =>d.Object_Type.includes(type));}
 
   const rmin = d3.min(dataset, (d) => d.Dimensions);
   const rmax = d3.max(dataset, (d) => d.Dimensions);

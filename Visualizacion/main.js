@@ -531,7 +531,7 @@ function createVis3(dataset, type) {
 
   contenedor3
   .selectAll("pattern")
-  .data(dataset)
+  .data(dataset, (d) => d.Messier)
   .join(
     (enter) =>
       enter
@@ -585,7 +585,7 @@ function createVis3(dataset, type) {
 var node = contenedor3
   .append("g")
   .selectAll("pattern")
-  .data(dataset)
+  .data(dataset, (d) => d.Messier)
   .join(
     (enter) =>
       enter

@@ -20,6 +20,6 @@ let dataset = d3.csv('data/dataset.csv', d => {
     d3.select("#BGlobular-Cluster").on("click", () =>createVis3(data, "Globular Cluster"))
     d3.select("#BOpen-Cluster").on("click", () =>createVis3(data, "Open Cluster"))
     d3.select("#BNebula").on("click", () =>createVis3(data, "Nebula"))
-    d3.select("#BDouble-Star").on("click", () =>createVis3(data, "Double Star"))
+    d3.select("#BDouble-Star").on("click", () =>createVis3(data, "Double star"))
     d3.select("#BReset").on("click", () =>{createVis3(data, "none");reiniciarElementos()})
   });

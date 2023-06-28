@@ -85,3 +85,6 @@ nodes = nodes
   .attr("r", (d) => escalaRadio(d.Dimensions))
   .attr("fill", (d) => "url(#img" + d.Messier + ")")
   .attr("stroke", (d) => color[d.Object_Type]);
+
+
+

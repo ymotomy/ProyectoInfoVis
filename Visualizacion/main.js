@@ -592,6 +592,14 @@ var node = contenedor3
         .attr("fill", (d) => "url(#img" + d.Messier + ")")
         .attr("stroke", (d) => color[d.Object_Type])
         .style("stroke-width", 2),
+    (update) => update
+    .attr("class", (d) => d.Messier + " " + createClass(d.Object_Type))
+        .attr("r", (d) => escalaRadio(d.Dimensions))
+        .attr("cx", WIDTH3 / 2)
+        .attr("cy", HEIGHT3 / 2)
+        .attr("fill", (d) => "url(#img" + d.Messier + ")")
+        .attr("stroke", (d) => color[d.Object_Type])
+        .style("stroke-width", 2),
     (exit) => exit.remove()
   )
   .on("click", (event, d) => select_object(createClass(d.Object_Type)))

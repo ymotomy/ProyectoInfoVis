@@ -223,38 +223,79 @@
                                 <li>Comparar la cantidad de diferentes tipos de objetos descubiertos a lo largo del tiempo.</li>
                             </ul>
                         </li>
-                        <li><strong>Justificación:</strong> Esta tarea permite a los usuarios entender cómo ha cambiado la cantidad de descubrimientos de objetos celestes a lo largo del tiempo, y cómo estas tendencias varían entre diferentes tipos de objetos. La visualización de líneas facilita la identificación de tendencias y patrones a lo largo del tiempo, y el uso de colores diferentes para diferentes tipos de objetos permite comparaciones fáciles entre categorías.</li>
+                        <li><strong>Justificación:</strong> Esta tarea proporciona un contexto histórico valioso y permite a los usuarios entender las tendencias y evolución en la exploración astronómica. Los patrones de descubrimiento pueden reflejar los avances en la tecnología de telescopios, los eventos astronómicos especiales, o los cambios en las prioridades de investigación. Comprender estos patrones puede mejorar la apreciación de los usuarios por la historia de la astronomía y la observación de cuerpos celestes.</li>
                     </ul>
+
                 </div>
 
                 <div class="response">
                     <h4>Tarea 3 (acción + objetivo) + justificación según el dominio presentado</h4>
-                    <!-- Puedes agregar los P que sean necesarios -->
                     <h4>Respuesta:</h4>
-                    <p>Modifica solo este texto (no el de arriba) para poner tu respuesta</p>
+                    <ul>
+                        <li><strong>Acción:</strong> Filtrar
+                            <ul>
+                                <li>Seleccionar un tipo específico de cuerpo celeste para ver solo esos elementos en la visualización completa</li>
+                            </ul>
+                        </li>
+                        <li><strong>Objetivo:</strong> Enfocar la exploración en un tipo específico de cuerpos celestes.
+                            <ul>
+                                <li>Examinar y aprender sobre un subconjunto específico de cuerpos celestes, por ejemplo, solo galaxias o solo nebulosas.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Justificación:</strong> Esta tarea permite a los usuarios personalizar su experiencia de exploración y concentrarse en un tipo específico de cuerpo celeste. El filtrado permite a los usuarios que tienen un interés específico explorar y aprender sobre los cuerpos celestes de su interés en detalle, sin distracciones de otros tipos de cuerpos celestes.</li>
+                    </ul>
                 </div>
         </div>
 
         <div class="case">
             <h2>Codificación visual e interacciones</h2>
-                <div class="response">
-                    <h4>Decisiones de diseño relacionadas a la primera tarea visual</h4>
-                    <!-- Puedes agregar los P que sean necesarios -->
-                    <h4>Respuesta:</h4>
-                    <p>Modifica solo este texto (no el de arriba) para poner tu respuesta</p>
-                </div>
+            <div class="response">
+                <h4>Decisiones de diseño relacionadas a la primera tarea visual</h4>
+                <h4>Respuesta:</h4>
+                <p>Para la tarea de navegación e identificación, las decisiones de codificación visual y diseño se centran en facilitar la interacción del usuario con la visualización y proporcionar detalles relevantes sobre los cuerpos celestes.</p>
+            
+                <p>Las imágenes de los objetos celestes están codificadas por la posición a lo largo del eje X, que representa la distancia al objeto desde la Tierra. Esta codificación de posición es intuitiva para los usuarios y facilita la tarea de navegación. Se utilizó una escala logarítmica para el eje de las distancias para facilitar la visualización de los objetos más lejanos.</p>
+                
+                <p>Además, se ha incluido la interacción de zoom y panorámica para permitir a los usuarios explorar la visualización a diferentes niveles de detalle. Esto es particularmente útil para manejar la densidad variable de objetos a diferentes distancias.</p>
+                
+                <p>Cuando un usuario hace clic en una imagen de objeto, se destacan esa imagen y se desaturan las demás. Esto facilita la identificación del objeto seleccionado y permite a los usuarios centrarse en la información relevante. Además, la información detallada del objeto seleccionado se muestra en un panel lateral. Esta interacción de "clic" con retroalimentación visual y presentación de información adicional facilita la tarea de aprendizaje sobre los cuerpos celestes.</p>
+                
+                <p>También se incorpora la interacción de "mouseover", que permite a los usuarios obtener información sobre un cuerpo celeste simplemente colocando el cursor sobre su imagen. La información del cuerpo celeste se muestra entonces en el panel de la izquierda. Esto mejora la facilidad de uso de la visualización, ya que los usuarios pueden obtener rápidamente una vista previa de la información del cuerpo celeste sin necesidad de hacer clic en él.</p>
+                
+                <p>Además, la imagen de la Tierra está codificada con una interacción de "clic" que restablece la visualización a su estado inicial, deseleccionando cualquier objeto celeste seleccionado previamente. Esto permite a los usuarios reiniciar fácilmente su exploración.</p>
+                
+                <p>Por último, todas las interacciones se facilitan mediante transiciones suaves y resaltado de objetos seleccionados, lo que contribuye a una experiencia de usuario agradable y eficaz.</p>
+            </div>
                 <div class="response">
                     <h4>Decisiones de diseño relacionadas a la segunda tarea visual</h4>
-                    <!-- Puedes agregar los P que sean necesarios -->
                     <h4>Respuesta:</h4>
-                    <p>Modifica solo este texto (no el de arriba) para poner tu respuesta</p>
+                    <p>La codificación visual en la visualización fue diseñada para facilitar el seguimiento de la cantidad de descubrimientos de diferentes tipos de objetos celestes a lo largo del tiempo. Los círculos representan los objetos descubiertos y están codificados por color para indicar el tipo de objeto. Esta elección de marca (círculos) y canal (color) facilita el reconocimiento del tipo de objeto en el gráfico.</p>
+                <p>La posición de los círculos en el eje Y corresponde a la cantidad de objetos descubiertos cada año. El uso de la posición espacial vertical como canal para este atributo permite una interpretación rápida y precisa de la cantidad de objetos descubiertos.</p>
+
+                <p>El eje X representa los años de descubrimiento, proporcionando un marco temporal para la visualización. Nuevamente, el uso de la posición espacial, pero esta vez en la dimensión horizontal, permite a los usuarios comprender fácilmente el avance del descubrimiento a lo largo del tiempo.</p>
+
+                <p>Además de las codificaciones visuales, se implementaron interacciones para mejorar la exploración y la comprensión de los datos. Cuando el usuario hace clic en los círculos de colores en la sección de información, los círculos correspondientes en el gráfico se resaltan mientras que los demás se desaturan. Esta interacción permite a los usuarios centrarse en un tipo de objeto específico a la vez, lo que facilita el análisis detallado de los patrones de descubrimiento para ese tipo de objeto.</p>
+
                 </div>
+                <h2>Codificación visual e interacciones</h2>
                 <div class="response">
                     <h4>Decisiones de diseño relacionadas a la tercera tarea visual</h4>
-                    <!-- Puedes agregar los P que sean necesarios -->
                     <h4>Respuesta:</h4>
-                    <p>Modifica solo este texto (no el de arriba) para poner tu respuesta</p>
+                    <p>En la tarea de filtrado y exploración enfocada, las decisiones de codificación visual y diseño se centran en permitir a los usuarios interactuar con la visualización de manera selectiva y concentrarse en los cuerpos celestes de su interés.</p>
+
+                    <p>Se utiliza una codificación visual en la que cada cuerpo celeste es representado como un círculo, donde el radio de cada círculo está codificado con la dimensión del objeto, usando una escala logarítmica para permitir una representación apropiada de objetos de varios tamaños. Cada objeto también está representado por una imagen, proporcionada a través de un patrón definido para cada objeto y referenciado por su identificador Messier. Este uso de imágenes realistas de los cuerpos celestes ayuda a los usuarios a identificarlos y mejora la experiencia visual.</p>
+
+                    <p>Además, se ha implementado una interacción de filtrado que permite a los usuarios seleccionar un tipo específico de objeto para ver. Esta interacción se implementa a través de la función 'filter' de D3, que selecciona sólo los elementos del tipo indicado en el dataset. Esta funcionalidad de filtrado es vital para la tarea de exploración enfocada, ya que permite a los usuarios concentrarse en un subconjunto de cuerpos celestes y explorarlos en detalle.</p>
+
+                    <p>En términos de la disposición espacial, los objetos celestes se distribuyen en la visualización utilizando una simulación de fuerzas. La función de carga, que es proporcional al cuadrado del radio del objeto, ayuda a repeler los objetos unos de otros, evitando el solapamiento y permitiendo una mejor visibilidad. La fuerza de colisión se utiliza para evitar que los círculos se superpongan unos a otros.</p>
+
+                    <p>Se ha implementado una interacción de arrastre que permite a los usuarios mover los cuerpos celestes dentro de la visualización. Esta interacción facilita la exploración en detalle de los cuerpos celestes, ya que los usuarios pueden mover y organizar los objetos a su gusto. La interacción de arrastre también contribuye a una experiencia de usuario más interactiva y atractiva.</p>
+
+                    <p>Además, se ha incluido una interacción de zoom para permitir a los usuarios acercar o alejar la visualización. Esto permite a los usuarios explorar la visualización a diferentes niveles de detalle, lo cual es particularmente útil al explorar un subconjunto específico de cuerpos celestes.</p>
+
+                    <p>Por último, la interacción de "clic" se ha implementado tanto en los patrones de imagen como en los círculos que representan los cuerpos celestes. Al hacer clic en un objeto, la función 'select_object' es invocada para destacar el objeto seleccionado y mostrar información detallada al respecto.</p>
                 </div>
+
         </div>
 
         <div class="case">

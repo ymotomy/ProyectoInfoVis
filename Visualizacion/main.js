@@ -140,19 +140,6 @@ function createVis1(dataset) {
       updateInfo(d)
     });
 
-    // .on("mouseover", function (event, d) {
-    //   if (selectedElement !== d) {
-    //     // Muestra la información solo si el elemento no está seleccionado
-    //     updateInfo(d);
-    //   }
-    // })
-    // .on("mouseout", function (event, d) {
-    //   if (selectedElement !== d) {
-    //     // Oculta la información solo si el elemento no está seleccionado
-    //     info1.style("visibility", "hidden");
-    //   }
-    // });
-
   function updateInfo(d) {
     info12.text(`${d.Name}`);
     info11.text(`${d.Messier}`);
@@ -577,6 +564,24 @@ function createVis3(dataset, type) {
   )
   .on("click", (event, d) => select_object(createClass(d.Object_Type)));
 
+
+     // contenedorImagenes
+  // .selectAll("image")
+  // .data(dataset)
+  // .enter()
+  // .append("image")
+  // .attr("class", (d) => "img " + d.Messier)
+  // .attr("xlink:href", (d) => "img/" + d.Messier + ".png")
+  // .attr("x", (d, i) => escalaDistance(d.Distance))
+  // .attr("y", HEIGHT1objects / 2 - radioAstro*1.5)
+  // .attr("width", radioAstro * 2)
+  // .attr("height", radioAstro * 2)
+  // .on("click", (event, d) => {
+  //   select_Messier(`.${d.Messier}`);
+  //   info1.style("visibility", "hidden");
+  //   updateInfo(d)
+  // });
+
 var node = contenedor3
   .append("g")
   .selectAll("pattern")
@@ -593,7 +598,7 @@ var node = contenedor3
         .attr("stroke", (d) => color[d.Object_Type])
         .style("stroke-width", 2),
     (update) => update
-    .attr("class", (d) => d.Messier + " " + createClass(d.Object_Type))
+        .attr("class", (d) => d.Messier + " " + createClass(d.Object_Type))
         .attr("r", (d) => escalaRadio(d.Dimensions))
         .attr("cx", WIDTH3 / 2)
         .attr("cy", HEIGHT3 / 2)
